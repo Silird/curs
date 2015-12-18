@@ -38,13 +38,37 @@ public class MyFrame {
      * Инициализация всех элементов и отображение формы на экране
      */
     public void show() {
-        //Create
+        FrameInit();
+        ToolBarInit();
+        TableInit();
+        FilterInit();
+        SaveLoadDialogInit();
+        InterfaceInit();
+        ListenersInit();
+
+        carsList.add(toolBar, BorderLayout.NORTH);
+        carsList.add(scroll, BorderLayout.CENTER);
+        carsList.add(eastPanel, BorderLayout.EAST);
+        carsList.add(southPanel, BorderLayout.SOUTH);
+
+        carsList.setVisible(true);
+    }
+
+    /**
+     * Инициализация главной формы
+     */
+    private void FrameInit() {
         carsList = new JFrame("Автомастерская");
         carsList.setSize(700, 300);
-        carsList.setMinimumSize(new Dimension(700,300));
+        carsList.setMinimumSize(new Dimension(700, 300));
         carsList.setLocationRelativeTo(null);
         carsList.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
 
+    /**
+     * Инициализация тулбара
+     */
+    private void ToolBarInit() {
         createBut = new JButton(new ImageIcon(getClass().getResource("/pictures/create.png")));
         createBut.setToolTipText("Создать новый список клиентов");
 
@@ -66,17 +90,24 @@ public class MyFrame {
         toolBar.add(saveBut);
         toolBar.add(printBut);
         toolBar.add(exitBut);
-        carsList.add(toolBar, BorderLayout.NORTH);
+    }
 
+    /**
+     * Инициализация таблицы
+     */
+    private void TableInit() {
         String columns[] = {"Клиент", "Марка машины", "Дата сдачи", "Готовность"};
         String data[][] = {{"Салимов Анушервон", "Bugatti Veyron", "20.08.2015", "Готово"},
                 {"Быков Андрей", "Москвич 412", "25.08.2015", "Не готово"}};
         model = new DefaultTableModel(data, columns);
         cars = new MyTable(model);
         scroll = new JScrollPane(cars);
-        carsList.add(scroll, BorderLayout.CENTER);
+    }
 
-        model.setValueAt("jdkjgkrj",1,1);
+    /**
+     * Инициализация поля фильтра
+     */
+    private void FilterInit() {
         client = new MyComboBox(model);
         clientcheck = new JCheckBox();
         clientPanel = new JPanel();
@@ -120,30 +151,25 @@ public class MyFrame {
         filterPanel.add(filterBut);
         eastPanel = new JPanel();
         eastPanel.add(filterPanel, BorderLayout.NORTH);
-        carsList.add(eastPanel, BorderLayout.EAST);
-        //3-4
-        filterBut.addActionListener(new ActionFilterListener(carsList, carName, client));   // (\(\
-        saveBut.addMouseListener(new MouseSaveListener(saveBut));                           // (>'•')
-        openBut.addMouseListener(new MouseOpenListener(openBut));                           // (~(")(")
-        printBut.addMouseListener(new MousePrintListener(printBut));
-        filterBut.addMouseListener(new MouseFilterListener(filterBut));
-        exitBut.addMouseListener(new MouseExitListener(exitBut));
-        createBut.addMouseListener(new MouseCreateListener(createBut));
-        exitBut.addActionListener(new ActionExitListener());
-        carName.addFocusListener(new FocusBNameListener(carName));
-        //5
+    }
+
+    /**
+     * Инициализация save- и load-диалогов
+     */
+    private void SaveLoadDialogInit() {
         save = new FileDialog(carsList, "Сохранение таблицы", FileDialog.SAVE);
         save.setFile("*.xml");
-        save.setDirectory("D:\\Work\\Java\\Универ\\labs\\Сохранённые таблицы");
+        save.setDirectory("D:\\Work\\Java\\Универ\\curs\\Сохранённые таблицы");
 
         load = new FileDialog(carsList, "Загрузка таблицы", FileDialog.LOAD);
         load.setFile("*.xml");
-        load.setDirectory("D:\\Work\\Java\\Универ\\labs\\Сохранённые таблицы");
+        load.setDirectory("D:\\Work\\Java\\Универ\\curs\\Сохранённые таблицы");
+    }
 
-        saveBut.addActionListener(new ActionSaveListener(carsList, save, model));
-        openBut.addActionListener(new ActionLoadListener(carsList, load, model, client));
-        createBut.addActionListener(new ActionCreateListener(model, client));
-
+    /**
+     * Инициализация интерфейса
+     */
+    private void InterfaceInit() {
         addPanel = new JPanel();
         addPanel.setLayout(new BoxLayout(addPanel, BoxLayout.X_AXIS));
         addLabel = new JLabel("Работа с таблицей");
@@ -156,48 +182,29 @@ public class MyFrame {
         southPanel.add(addLabelPanel);
 
         clientName = new JTextField("Клиент");
-        clientName.addFocusListener(new FocusAddclientNameListener(clientName));
 
         carName = new JTextField("Марка машины");
-        carName.addFocusListener(new FocusAddcarNameListener(carName));
 
         date = new JTextField("Дата");
-        date.addFocusListener(new FocusAddDateListener(date));
-        dateTake.addFocusListener(new FocusAddDateListener(dateTake));
-
 
         checkcar = new JCheckBox("Готовность");
 
         addBut = new JButton(new ImageIcon(getClass().getResource("/pictures/add.png")));
         addBut.setToolTipText("Добавить элемент в таблицу");
-        addBut.addMouseListener(new MouseAddListener(addBut));
-        addBut.addActionListener(new ActionAddListener(carsList, model, clientName, carName, date, checkcar, client));
 
         removeBut = new JButton(new ImageIcon(getClass().getResource("/pictures/remove.png")));
         removeBut.setToolTipText("Удалить выбранные строки из таблицы");
-        removeBut.addActionListener(new ActionRemoveListener(carsList, model, cars, client));
-        removeBut.addMouseListener(new MouseRemoveListener(removeBut));
 
         editBut = new JButton(new ImageIcon(getClass().getResource("/pictures/edit.png")));
         editBut.setToolTipText("Редактировать выбранную строку таблицы");
-        editBut.addMouseListener(new MouseEditListener(editBut));
 
         checkEditBut = new JButton(new ImageIcon(getClass().getResource("/pictures/add.png")));
         checkEditBut.setToolTipText("Принять редактирование");
         checkEditBut.setVisible(false);
-        checkEditBut.addMouseListener(new MouseAddListener(checkEditBut));
 
-        undoBut = new JButton(new ImageIcon(getClass().getResource("/pictures/undo.png"))); //  (\/)
-        undoBut.setToolTipText("Отменить редактирование");                                  //  ( ..)
-        undoBut.setVisible(false);                                                          // c(")(")
-        undoBut.addMouseListener(new MouseUndoListener(undoBut));
-
-        editBut.addActionListener(new ActionEditListener(carsList, model, cars, addBut, checkEditBut,
-                editBut, undoBut, removeBut, clientName, carName, date, checkcar));
-        undoBut.addActionListener(new ActionUndoListener(carsList, model, cars, addBut, checkEditBut,
-                editBut, undoBut, removeBut, clientName, carName, date, checkcar));
-        checkEditBut.addActionListener(new ActionAcceptListener(carsList, model, cars, addBut, checkEditBut,
-                editBut, undoBut, removeBut, clientName, carName, date, checkcar, client));
+        undoBut = new JButton(new ImageIcon(getClass().getResource("/pictures/undo.png")));
+        undoBut.setToolTipText("Отменить редактирование");
+        undoBut.setVisible(false);
 
         addPanel.add(clientName);
         addPanel.add(carName);
@@ -210,8 +217,45 @@ public class MyFrame {
         addPanel.add(removeBut);
 
         southPanel.add(addPanel);
-        carsList.add(southPanel, BorderLayout.SOUTH);
+    }
 
-        carsList.setVisible(true);
+    /**
+     * Привязка слушателей к объектам
+     */
+    private void ListenersInit() {
+        //ActionListeners
+        filterBut.addActionListener(new ActionFilterListener(carsList, carName, client));
+        exitBut.addActionListener(new ActionExitListener());
+        saveBut.addActionListener(new ActionSaveListener(carsList, save, model));
+        openBut.addActionListener(new ActionLoadListener(carsList, load, model, client));
+        createBut.addActionListener(new ActionCreateListener(model, client));
+        addBut.addActionListener(new ActionAddListener(carsList, model, clientName, carName, date, checkcar, client));
+        removeBut.addActionListener(new ActionRemoveListener(carsList, model, cars, client));
+        editBut.addActionListener(new ActionEditListener(carsList, model, cars, addBut, checkEditBut,
+                editBut, undoBut, removeBut, clientName, carName, date, checkcar));
+        undoBut.addActionListener(new ActionUndoListener(carsList, model, cars, addBut, checkEditBut,
+                editBut, undoBut, removeBut, clientName, carName, date, checkcar));
+        checkEditBut.addActionListener(new ActionAcceptListener(carsList, model, cars, addBut, checkEditBut,
+                editBut, undoBut, removeBut, clientName, carName, date, checkcar, client));
+
+        //FocusListeners
+        clientName.addFocusListener(new FocusAddclientNameListener(clientName));
+        carName.addFocusListener(new FocusAddcarNameListener(carName));
+        date.addFocusListener(new FocusAddDateListener(date));
+        dateTake.addFocusListener(new FocusAddDateListener(dateTake));
+        carName.addFocusListener(new FocusBNameListener(carName));
+
+        //MouseListeners
+        removeBut.addMouseListener(new MouseRemoveListener(removeBut));
+        addBut.addMouseListener(new MouseAddListener(addBut));
+        editBut.addMouseListener(new MouseEditListener(editBut));
+        checkEditBut.addMouseListener(new MouseAddListener(checkEditBut));
+        undoBut.addMouseListener(new MouseUndoListener(undoBut));                           // (\(\
+        saveBut.addMouseListener(new MouseSaveListener(saveBut));                           // (>'•')
+        openBut.addMouseListener(new MouseOpenListener(openBut));                           // (~(")(")
+        printBut.addMouseListener(new MousePrintListener(printBut));
+        filterBut.addMouseListener(new MouseFilterListener(filterBut));
+        exitBut.addMouseListener(new MouseExitListener(exitBut));
+        createBut.addMouseListener(new MouseCreateListener(createBut));
     }
 }
