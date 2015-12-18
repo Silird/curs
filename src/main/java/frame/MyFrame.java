@@ -3,8 +3,6 @@ package frame;
 import Listeners.ActionListeners.*;
 import Listeners.FocusListeners.*;
 import Listeners.MouseListeners.*;
-import util.MyComboBox;
-import util.MyTable;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

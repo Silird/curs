@@ -1,6 +1,6 @@
 package Listeners.ActionListeners;
 
-import util.MyComboBox;
+import frame.MyComboBox;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
