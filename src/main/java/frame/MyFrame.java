@@ -32,6 +32,7 @@ public class MyFrame {
     protected JCheckBox checkcar;
     protected JButton addBut, removeBut, editBut, checkEditBut, undoBut;
     protected JPanel addPanel, southPanel, addLabelPanel;
+    protected JTabbedPane tables;
 
     /**
      * Инициализация всех элементов и отображение формы на экране
@@ -46,7 +47,7 @@ public class MyFrame {
         ListenersInit();
 
         carsList.add(toolBar, BorderLayout.NORTH);
-        carsList.add(scroll, BorderLayout.CENTER);
+        carsList.add(tables, BorderLayout.CENTER);
         carsList.add(eastPanel, BorderLayout.EAST);
         carsList.add(southPanel, BorderLayout.SOUTH);
 
@@ -100,7 +101,11 @@ public class MyFrame {
                 {"Быков Андрей", "Москвич 412", "25.08.2015", "Не готово"}};
         model = new DefaultTableModel(data, columns);
         cars = new MyTable(model);
+
         scroll = new JScrollPane(cars);
+
+        tables = new JTabbedPane();
+        tables.addTab("Основная информация", scroll);
     }
 
     /**
