@@ -26,7 +26,6 @@ public class MyFrame {
     protected JComboBox comboCheck;
     protected JLabel filterLabel;
     protected JPanel eastPanel;
-    //5
     protected FileDialog save, load;
     protected JTextField clientName, carName, date;
     protected JLabel addLabel;
