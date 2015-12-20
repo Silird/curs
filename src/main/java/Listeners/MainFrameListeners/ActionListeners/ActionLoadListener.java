@@ -1,6 +1,5 @@
-package Listeners.ActionListeners;
+package Listeners.MainFrameListeners.ActionListeners;
 
-import frame.MyComboBox;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
@@ -26,7 +25,6 @@ public class ActionLoadListener implements ActionListener {
     protected JFrame carsList;
     protected FileDialog load;
     protected DefaultTableModel model;
-    protected MyComboBox cCombo;
 
     /**
      * Конструктор
@@ -34,13 +32,11 @@ public class ActionLoadListener implements ActionListener {
      * @param cList
      * @param l
      * @param m
-     * @param c
      */
-    public ActionLoadListener(JFrame cList, FileDialog l, DefaultTableModel m, MyComboBox c) {
+    public ActionLoadListener(JFrame cList, FileDialog l, DefaultTableModel m) {
         carsList = cList;
         load = l;
         model = m;
-        cCombo = c;
     }
 
     /**

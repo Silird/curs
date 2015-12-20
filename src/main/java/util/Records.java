@@ -5,12 +5,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Records {
-    Set<Record> record;
+    Set<Record> records;
     DefaultTableModel model;
 
     public Records(DefaultTableModel m) {
         model = m;
-        record = new HashSet<Record>();
+        records = new HashSet<Record>();
 
     }
 

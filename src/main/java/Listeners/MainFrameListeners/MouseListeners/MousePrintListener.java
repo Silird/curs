@@ -1,23 +1,23 @@
-package Listeners.MouseListeners;
+package Listeners.MainFrameListeners.MouseListeners;
 
 import javax.swing.*;
 import java.awt.event.*;
 
 /**
- * Обработчик события наведения мышки на иконку фильтра
+ * Обработчик события наведения мышки на иконку сохранения
  */
 
-public class MouseFilterListener implements MouseListener {
-    private JButton filterBut;
-
-    public MouseFilterListener(JButton filterB) {
-        filterBut = filterB;
-    }
+public class MousePrintListener implements MouseListener {
+    private JButton printBut;
 
     /**
      * Конструктор
-     * @param e
+     * @param printB
      */
+    public MousePrintListener(JButton printB) {
+        printBut = printB;
+    }
+
     public void mouseClicked(MouseEvent e) {
 
     }
@@ -35,7 +35,7 @@ public class MouseFilterListener implements MouseListener {
      * @param e
      */
     public void mouseEntered(MouseEvent e) {
-        filterBut.setIcon(new ImageIcon(getClass().getResource("/pictures/filter_active.png")));
+        printBut.setIcon(new ImageIcon(getClass().getResource("/pictures/print_active.png")));
     }
 
     /**
@@ -43,6 +43,6 @@ public class MouseFilterListener implements MouseListener {
      * @param e
      */
     public void mouseExited(MouseEvent e) {
-        filterBut.setIcon(new ImageIcon(getClass().getResource("/pictures/filter.png")));
+        printBut.setIcon(new ImageIcon(getClass().getResource("/pictures/print.png")));
     }
 }

@@ -1,6 +1,4 @@
-package Listeners.ActionListeners;
-
-import frame.MyComboBox;
+package Listeners.MainFrameListeners.ActionListeners;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +16,6 @@ public class ActionAcceptListener implements ActionListener {
     protected JButton addBut, checkEditBut, editBut, undoBut, removeBut;
     protected JTextField clientName, carName, date;
     protected JCheckBox ready;
-    protected MyComboBox cCombo;
 
     /**
      * Конструктор
@@ -34,11 +31,10 @@ public class ActionAcceptListener implements ActionListener {
      * @param carN
      * @param d
      * @param readyB
-     * @param cC
      */
     public ActionAcceptListener(JFrame cList, DefaultTableModel m, JTable c, JButton addB, JButton checkB,
                                JButton editB, JButton undoB, JButton removeB, JTextField clientN,
-                               JTextField carN, JTextField d, JCheckBox readyB, MyComboBox cC) {
+                               JTextField carN, JTextField d, JCheckBox readyB) {
         carsList = cList;
         model = m;
         cars = c;
@@ -51,7 +47,6 @@ public class ActionAcceptListener implements ActionListener {
         carName = carN;
         date = d;
         ready = readyB;
-        cCombo = cC;
     }
 
     /**
@@ -130,7 +125,6 @@ public class ActionAcceptListener implements ActionListener {
             carName.setText("Марка машины");
             ready.setSelected(false);
             cars.setEnabled(true);
-            cCombo.refresh(model);
         }
         catch (NullaNameException ex) {
             JOptionPane.showMessageDialog(carsList, ex.getMessage());

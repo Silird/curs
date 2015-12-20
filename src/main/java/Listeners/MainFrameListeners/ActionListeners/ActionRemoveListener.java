@@ -1,6 +1,4 @@
-package Listeners.ActionListeners;
-
-import frame.MyComboBox;
+package Listeners.MainFrameListeners.ActionListeners;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -15,20 +13,17 @@ public class ActionRemoveListener implements ActionListener {
     protected JFrame carsList;
     protected DefaultTableModel model;
     protected JTable cars;
-    protected MyComboBox cCombo;
 
     /**
      * Конструктор
      * @param cList
      * @param m
      * @param c
-     * @param cC
      */
-    public ActionRemoveListener(JFrame cList, DefaultTableModel m, JTable c, MyComboBox cC) {
+    public ActionRemoveListener(JFrame cList, DefaultTableModel m, JTable c) {
         carsList = cList;
         model = m;
         cars= c;
-        cCombo = cC;
     }
 
     /**
@@ -54,7 +49,6 @@ public class ActionRemoveListener implements ActionListener {
             for (i = cars.getSelectedRowCount(); i > 0; i--) {
                 model.removeRow(deliting[i - 1]);
             }
-            cCombo.refresh(model);
         }
         catch (NullSelectedException ex) {
             JOptionPane.showMessageDialog(carsList, ex.getMessage());

@@ -1,21 +1,21 @@
-package Listeners.MouseListeners;
+package Listeners.MainFrameListeners.MouseListeners;
 
 import javax.swing.*;
 import java.awt.event.*;
 
 /**
- * Обработчик события наведения мышки на иконку редактирования
+ * Обработчик события наведения мышки на иконку выхода
  */
 
-public class MouseEditListener implements MouseListener {
-    private JButton editBut;
+public class MouseExitListener implements MouseListener {
+    private JButton exitBut;
 
     /**
      * Конструктор
-     * @param editB
+     * @param exitB
      */
-    public MouseEditListener(JButton editB) {
-        editBut = editB;
+    public MouseExitListener(JButton exitB) {
+        exitBut = exitB;
     }
 
     public void mouseClicked(MouseEvent e) {
@@ -35,7 +35,7 @@ public class MouseEditListener implements MouseListener {
      * @param e
      */
     public void mouseEntered(MouseEvent e) {
-        editBut.setIcon(new ImageIcon(getClass().getResource("/pictures/edit_active.png")));
+        exitBut.setIcon(new ImageIcon(getClass().getResource("/pictures/exit_active.png")));
     }
 
     /**
@@ -43,6 +43,6 @@ public class MouseEditListener implements MouseListener {
      * @param e
      */
     public void mouseExited(MouseEvent e) {
-        editBut.setIcon(new ImageIcon(getClass().getResource("/pictures/edit.png")));
+        exitBut.setIcon(new ImageIcon(getClass().getResource("/pictures/exit.png")));
     }
 }

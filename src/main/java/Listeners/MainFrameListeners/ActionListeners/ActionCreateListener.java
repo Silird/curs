@@ -1,6 +1,4 @@
-package Listeners.ActionListeners;
-
-import frame.MyComboBox;
+package Listeners.MainFrameListeners.ActionListeners;
 
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
@@ -12,16 +10,13 @@ import java.awt.event.ActionListener;
 
 public class ActionCreateListener implements ActionListener {
     protected DefaultTableModel model;
-    protected MyComboBox сCombo;
 
     /**
      * Конструктор
      * @param m
-     * @param с
      */
-    public ActionCreateListener(DefaultTableModel m, MyComboBox с) {
+    public ActionCreateListener(DefaultTableModel m) {
         model = m;
-        сCombo = с;
     }
 
     /**
@@ -34,6 +29,5 @@ public class ActionCreateListener implements ActionListener {
         for (i = 0; i < rows; i++) {
             model.removeRow(0);
         }
-        сCombo.refresh(model);
     }
 }

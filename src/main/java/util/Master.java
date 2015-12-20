@@ -1,10 +1,12 @@
 package util;
 
 public class Master {
+    String name;
     int KOD[];
     int emp, empMAX;
 
-    public Master(int kod[], int e, int emax) {
+    public Master(String n, int kod[], int e, int emax) {
+        name = n;
         KOD = kod;
         emp = e;
         empMAX = emax;
@@ -22,6 +24,10 @@ public class Master {
 
     public void EmployUp() {
         emp++;
+    }
+
+    public void EmployDown() {
+        emp--;
     }
 
     public int isCan(int kod) {

@@ -1,4 +1,4 @@
-package Listeners.FocusListeners;
+package Listeners.MainFrameListeners.FocusListeners;
 
 import javax.swing.*;
 import java.awt.event.*;

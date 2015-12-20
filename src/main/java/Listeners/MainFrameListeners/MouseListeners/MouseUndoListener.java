@@ -1,21 +1,21 @@
-package Listeners.MouseListeners;
+package Listeners.MainFrameListeners.MouseListeners;
 
 import javax.swing.*;
 import java.awt.event.*;
 
 /**
- * Обработчик события наведения мышки на иконку загрузки
+ * Обработчик события наведения мышки на иконку отмены
  */
 
-public class MouseOpenListener implements MouseListener {
-    private JButton openBut;
+public class MouseUndoListener implements MouseListener {
+    private JButton undoBut;
 
     /**
      * Конструктор
-     * @param openB
+     * @param undoB
      */
-    public MouseOpenListener(JButton openB) {
-        openBut = openB;
+    public MouseUndoListener(JButton undoB) {
+        undoBut = undoB;
     }
 
     public void mouseClicked(MouseEvent e) {
@@ -35,7 +35,7 @@ public class MouseOpenListener implements MouseListener {
      * @param e
      */
     public void mouseEntered(MouseEvent e) {
-        openBut.setIcon(new ImageIcon(getClass().getResource("/pictures/open_active.png")));
+        undoBut.setIcon(new ImageIcon(getClass().getResource("/pictures/undo_active.png")));
     }
 
     /**
@@ -43,6 +43,6 @@ public class MouseOpenListener implements MouseListener {
      * @param e
      */
     public void mouseExited(MouseEvent e) {
-        openBut.setIcon(new ImageIcon(getClass().getResource("/pictures/open.png")));
+        undoBut.setIcon(new ImageIcon(getClass().getResource("/pictures/undo.png")));
     }
 }

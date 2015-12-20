@@ -1,8 +1,8 @@
-package frame;
+package MainFrame;
 
-import Listeners.ActionListeners.*;
-import Listeners.FocusListeners.*;
-import Listeners.MouseListeners.*;
+import Listeners.MainFrameListeners.ActionListeners.*;
+import Listeners.MainFrameListeners.FocusListeners.*;
+import Listeners.MainFrameListeners.MouseListeners.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -12,12 +12,18 @@ import java.awt.*;
  * Конструктор формы
  */
 public class MyFrame {
+    //Форма
     protected JFrame carsList;
+    //Таблица
     protected DefaultTableModel model;
+    protected JScrollPane scroll;
+    protected ClientTable cars;
+    protected JTabbedPane tables;
+    //Тулбар
     protected JButton createBut, openBut, saveBut, printBut, exitBut;
     protected JToolBar toolBar;
-    protected JScrollPane scroll;
-    protected MyTable cars;
+    //Фильтр
+    /*
     protected MyComboBox client;
     protected JTextField dateTake;
     protected JButton filterBut;
@@ -26,30 +32,29 @@ public class MyFrame {
     protected JComboBox comboCheck;
     protected JLabel filterLabel;
     protected JPanel eastPanel;
+    */
+    //Диалоги сохранения-загрузки
     protected FileDialog save, load;
+    //Интерфейс
+    /*
     protected JTextField clientName, carName, date;
     protected JLabel addLabel;
     protected JCheckBox checkcar;
     protected JButton addBut, removeBut, editBut, checkEditBut, undoBut;
-    protected JPanel addPanel, southPanel, addLabelPanel;
-    protected JTabbedPane tables;
+    protected JPanel southPanel, addLabelPanel, addPanel;
+    */
 
     /**
      * Инициализация всех элементов и отображение формы на экране
      */
     public void show() {
         FrameInit();
-        ToolBarInit();
-        TableInit();
-        FilterInit();
+        ToolBarInit(); //Наверх формы
+        TableInit();  //Посередине формы
+        //FilterInit();  //Справа формы
         SaveLoadDialogInit();
-        InterfaceInit();
+        //InterfaceInit();  //Вниз формы
         ListenersInit();
-
-        carsList.add(toolBar, BorderLayout.NORTH);
-        carsList.add(tables, BorderLayout.CENTER);
-        carsList.add(eastPanel, BorderLayout.EAST);
-        carsList.add(southPanel, BorderLayout.SOUTH);
 
         carsList.setVisible(true);
     }
@@ -90,6 +95,8 @@ public class MyFrame {
         toolBar.add(saveBut);
         toolBar.add(printBut);
         toolBar.add(exitBut);
+
+        carsList.add(toolBar, BorderLayout.NORTH); //тулбар
     }
 
     /**
@@ -100,17 +107,20 @@ public class MyFrame {
         String data[][] = {{"Салимов Анушервон", "Bugatti Veyron", "20.08.2015", "Готово"},
                 {"Быков Андрей", "Москвич 412", "25.08.2015", "Не готово"}};
         model = new DefaultTableModel(data, columns);
-        cars = new MyTable(model);
+        cars = new ClientTable(model);
 
         scroll = new JScrollPane(cars);
 
         tables = new JTabbedPane();
         tables.addTab("Основная информация", scroll);
+
+        carsList.add(tables, BorderLayout.CENTER); //Таблицы
     }
 
     /**
      * Инициализация поля фильтра
      */
+    /*
     private void FilterInit() {
         client = new MyComboBox(model);
         clientcheck = new JCheckBox();
@@ -155,7 +165,10 @@ public class MyFrame {
         filterPanel.add(filterBut);
         eastPanel = new JPanel();
         eastPanel.add(filterPanel, BorderLayout.NORTH);
+
+        carsList.add(eastPanel, BorderLayout.EAST); //Фильтр
     }
+    */
 
     /**
      * Инициализация save- и load-диалогов
@@ -173,6 +186,7 @@ public class MyFrame {
     /**
      * Инициализация интерфейса
      */
+    /*
     private void InterfaceInit() {
         addPanel = new JPanel();
         addPanel.setLayout(new BoxLayout(addPanel, BoxLayout.X_AXIS));
@@ -221,45 +235,62 @@ public class MyFrame {
         addPanel.add(removeBut);
 
         southPanel.add(addPanel);
+
+        carsList.add(southPanel, BorderLayout.SOUTH); //Интерфейс
     }
+    */
 
     /**
      * Привязка слушателей к объектам
      */
     private void ListenersInit() {
         //ActionListeners
-        filterBut.addActionListener(new ActionFilterListener(carsList, carName, client));
+        //Фильтр
+        //filterBut.addActionListener(new ActionFilterListener(carsList, carName, client));
+        //Тулбар
         exitBut.addActionListener(new ActionExitListener());
         saveBut.addActionListener(new ActionSaveListener(carsList, save, model));
-        openBut.addActionListener(new ActionLoadListener(carsList, load, model, client));
-        createBut.addActionListener(new ActionCreateListener(model, client));
-        addBut.addActionListener(new ActionAddListener(carsList, model, clientName, carName, date, checkcar, client));
-        removeBut.addActionListener(new ActionRemoveListener(carsList, model, cars, client));
+        openBut.addActionListener(new ActionLoadListener(carsList, load, model));
+        createBut.addActionListener(new ActionCreateListener(model));
+        //Интерфейс
+        /*
+        addBut.addActionListener(new ActionAddListener(carsList, model, clientName, carName, date, checkcar));
+        removeBut.addActionListener(new ActionRemoveListener(carsList, model, cars));
         editBut.addActionListener(new ActionEditListener(carsList, model, cars, addBut, checkEditBut,
                 editBut, undoBut, removeBut, clientName, carName, date, checkcar));
         undoBut.addActionListener(new ActionUndoListener(carsList, model, cars, addBut, checkEditBut,
                 editBut, undoBut, removeBut, clientName, carName, date, checkcar));
         checkEditBut.addActionListener(new ActionAcceptListener(carsList, model, cars, addBut, checkEditBut,
-                editBut, undoBut, removeBut, clientName, carName, date, checkcar, client));
+                editBut, undoBut, removeBut, clientName, carName, date, checkcar));
+        */
 
         //FocusListeners
+        //Интерфейс
+        /*
         clientName.addFocusListener(new FocusAddclientNameListener(clientName));
         carName.addFocusListener(new FocusAddcarNameListener(carName));
         date.addFocusListener(new FocusAddDateListener(date));
-        dateTake.addFocusListener(new FocusAddDateListener(dateTake));
         carName.addFocusListener(new FocusBNameListener(carName));
+        */
+        //Фильтр
+        //dateTake.addFocusListener(new FocusAddDateListener(dateTake));
 
         //MouseListeners
+        //Интерфейс
+        /*
         removeBut.addMouseListener(new MouseRemoveListener(removeBut));
         addBut.addMouseListener(new MouseAddListener(addBut));
         editBut.addMouseListener(new MouseEditListener(editBut));
         checkEditBut.addMouseListener(new MouseAddListener(checkEditBut));
-        undoBut.addMouseListener(new MouseUndoListener(undoBut));                           // (\(\
-        saveBut.addMouseListener(new MouseSaveListener(saveBut));                           // (>'•')
-        openBut.addMouseListener(new MouseOpenListener(openBut));                           // (~(")(")
-        printBut.addMouseListener(new MousePrintListener(printBut));
-        filterBut.addMouseListener(new MouseFilterListener(filterBut));
+        undoBut.addMouseListener(new MouseUndoListener(undoBut));
+        */
+        //Тулбар
+        saveBut.addMouseListener(new MouseSaveListener(saveBut));                           // (\(\
+        openBut.addMouseListener(new MouseOpenListener(openBut));                           // (>'•')
+        printBut.addMouseListener(new MousePrintListener(printBut));                        // (~(")(")
         exitBut.addMouseListener(new MouseExitListener(exitBut));
         createBut.addMouseListener(new MouseCreateListener(createBut));
+        //Фильтр
+        //filterBut.addMouseListener(new MouseFilterListener(filterBut));
     }
 }

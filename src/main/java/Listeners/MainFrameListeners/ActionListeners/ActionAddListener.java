@@ -1,6 +1,4 @@
-package Listeners.ActionListeners;
-
-import frame.MyComboBox;
+package Listeners.MainFrameListeners.ActionListeners;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -16,7 +14,6 @@ public class ActionAddListener implements ActionListener {
     protected DefaultTableModel model;
     protected JTextField clientName, carName, date;
     protected JCheckBox ready;
-    protected MyComboBox cCombo;
 
     /**
      * Конструктор
@@ -26,17 +23,15 @@ public class ActionAddListener implements ActionListener {
      * @param carN
      * @param d
      * @param r
-     * @param cC
      */
     public ActionAddListener(JFrame cList, DefaultTableModel m, JTextField clientN, JTextField carN, JTextField d,
-                              JCheckBox r, MyComboBox cC) {
+                              JCheckBox r) {
         carsList = cList;
         model = m;
         clientName = clientN;
         carName = carN;
         date = d;
         ready = r;
-        cCombo = cC;
     }
 
     /**
@@ -120,7 +115,6 @@ public class ActionAddListener implements ActionListener {
             carName.setText("Марка машины");
             date.setText("Дата");
             ready.setSelected(false);
-            cCombo.refresh(model);
         }
         catch (NullclientNameException ex) {
             JOptionPane.showMessageDialog(carsList, ex.getMessage());

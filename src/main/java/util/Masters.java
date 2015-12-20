@@ -6,14 +6,14 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class Masters {
-    Set<Master> record;
+    Set<Master> records;
 
     public Masters() {
-        record = new HashSet<Master>();
+        records = new HashSet<Master>();
     }
 
     public Master GetMaster(int kod) {
-        Iterator<Master> it = record.iterator();
+        Iterator<Master> it = records.iterator();
         int prev;
         Master master;
         Master mastertmp = null;
@@ -25,5 +25,9 @@ public class Masters {
             }
         }
         return mastertmp;
+    }
+
+    public void add(String n, int kod[], int e, int emax) {
+        records.add(new Master(n, kod, e, emax));
     }
 }
