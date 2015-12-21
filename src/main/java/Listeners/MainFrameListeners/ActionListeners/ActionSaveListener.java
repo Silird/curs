@@ -57,7 +57,7 @@ public class ActionSaveListener implements ActionListener {
                 throw new NullFileException();
             }
             Save save = new Save();
-            save.SaveXML(fileName, model);
+            //save.SaveXML(fileName, model);
         }
         catch (NullFileException ex) {
             JOptionPane.showMessageDialog(carsList, ex.getMessage());

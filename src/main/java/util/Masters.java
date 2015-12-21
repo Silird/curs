@@ -15,10 +15,8 @@ public class Masters {
 
     public Master GetMaster(int kod) {
         Iterator<Master> it = records.iterator();
-        int prev;
         Master master;
         Master mastertmp = null;
-        //prev = -1;
         while (it.hasNext()) {
             master = it.next();
             if (((mastertmp == null) && (master.isCan(kod) != -1)) || (master.isCan(kod) < mastertmp.isCan(kod))) {
@@ -28,8 +26,23 @@ public class Masters {
         return mastertmp;
     }
 
-    public void add(Master m) {
-        records.add(m);
+    public boolean contain(Master o) {
+        Iterator<Master> it = records.iterator();
+        while(it.hasNext()) {
+            if (it.next().equals(o)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void add(Master m) throws DoubleMasterException {
+        if (!contain(m)) {
+            records.add(m);
+        }
+        else {
+            throw new DoubleMasterException();
+        }
     }
 
     public int Kolvo() {
@@ -43,7 +56,7 @@ public class Masters {
         return i;
     }
 
-    public String[][] GiveStrings() {
+    public String[][] GiveStrings(boolean forsave) {
         if (Kolvo() == 0) {
             return null;
         }
@@ -56,26 +69,28 @@ public class Masters {
             tmpMaster = it.next();
             tmp[i][0] = tmpMaster.getName();
             tmpKOD = tmpMaster.getKOD();
-            tmp[i][1] = KODToString(tmpKOD[0]);
-            if (tmpKOD[1] != 0) {
+            if (!forsave) {
+                tmp[i][1] = KODToString(tmpKOD[0]);
                 tmp[i][2] = KODToString(tmpKOD[1]);
-                if (tmpKOD[2] != 0) {
-                    tmp[i][3] = KODToString(tmpKOD[2]);
-                } else {
-                    tmp[i][3] = "Отсутствует";
-                }
+                tmp[i][3] = KODToString(tmpKOD[2]);
             }
             else {
-                tmp[i][2] = "Отсутствует";
+                tmp[i][1] = String.valueOf(tmpKOD[0]);
+                tmp[i][2] = String.valueOf(tmpKOD[1]);
+                tmp[i][3] = String.valueOf(tmpKOD[2]);
             }
             tmp[i][4] = String.valueOf(tmpMaster.getEmp());
             tmp[i][5] = String.valueOf(tmpMaster.getEmpMAX());
+            i++;
         }
         return tmp;
     }
 
     public String KODToString(int KOD) {
         switch (KOD) {
+            case 0: {
+                return new String("Отсутствует");
+            }
             case 1: {
                 return new String("Покраска");
             }
@@ -94,6 +109,15 @@ public class Masters {
             default: {
                 return new String("Прочее");
             }
+        }
+    }
+
+    public void Remove() {
+        Iterator<Master> it;
+        it = records.iterator();
+        while (it.hasNext()) {
+            records.remove(it.next());
+            it = records.iterator();
         }
     }
 }

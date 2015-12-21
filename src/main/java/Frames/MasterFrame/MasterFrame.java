@@ -1,6 +1,8 @@
 package Frames.MasterFrame;
 
 
+import Listeners.MasterFrameListeners.ActionListeners.ActionAddListener;
+import Listeners.MasterFrameListeners.ActionListeners.ActionCancelListener;
 import Listeners.MasterFrameListeners.ActionListeners.ActionKOD2Listener;
 import Listeners.MasterFrameListeners.ActionListeners.ActionKOD3Listener;
 import util.WorkMasters;
@@ -15,9 +17,9 @@ public class MasterFrame extends JDialog {
     private JPanel buttonPanel;
     private JButton addBut, cancelBut;
     //Панельки ввода
-    private JPanel enterPanel, namePanel, nameLeftPanel, KODPanel, empPanel, empLeftPanel, empMaxPanel, empMaxLeftPanel;
-    private JLabel nameLabel, empLabel, empMaxLabel;
-    private JTextField nameField, empField, empMaxField;
+    private JPanel enterPanel, namePanel, nameLeftPanel, KODPanel, empMaxPanel, empMaxLeftPanel;
+    private JLabel nameLabel, empMaxLabel;
+    private JTextField nameField, empMaxField;
     private JComboBox KOD1Box, KOD2Box, KOD3Box;
 
     public MasterFrame(WorkMasters ml, JFrame owner) {
@@ -63,14 +65,6 @@ public class MasterFrame extends JDialog {
         KODPanel.add(KOD2Box);
         KODPanel.add(KOD3Box);
 
-        empLabel = new JLabel("Загруженность");
-        empField = new JTextField(20);
-        empLeftPanel = new JPanel();
-        empLeftPanel.add(empLabel);
-        empLeftPanel.add(empField);
-        empPanel = new JPanel();
-        empPanel.add(empLeftPanel, BorderLayout.WEST);
-
         empMaxLabel = new JLabel("Максимальная загруженность");
         empMaxField = new JTextField(20);
         empMaxLeftPanel = new JPanel();
@@ -83,7 +77,6 @@ public class MasterFrame extends JDialog {
         enterPanel.setLayout(new BoxLayout(enterPanel, BoxLayout.Y_AXIS));
         enterPanel.add(namePanel);
         enterPanel.add(KODPanel);
-        enterPanel.add(empPanel);
         enterPanel.add(empMaxPanel);
 
         add(enterPanel, BorderLayout.CENTER);
@@ -104,6 +97,9 @@ public class MasterFrame extends JDialog {
     }
 
     private void ListenersInit() {
+        addBut.addActionListener(new ActionAddListener(MasterFrame.this, nameField, empMaxField,
+                KOD1Box, KOD2Box, KOD3Box, mastersList));
+        cancelBut.addActionListener(new ActionCancelListener(MasterFrame.this));
         KOD2Box.addActionListener(new ActionKOD2Listener(MasterFrame.this, KOD1Box, KOD2Box));
         KOD3Box.addActionListener(new ActionKOD3Listener(MasterFrame.this, KOD1Box, KOD2Box, KOD3Box));
     }

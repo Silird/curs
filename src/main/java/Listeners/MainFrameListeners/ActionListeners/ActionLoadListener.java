@@ -61,7 +61,7 @@ public class ActionLoadListener implements ActionListener {
             }
             //LoadXML(fileName);
             Load load = new Load();
-            load.LoadXML(fileName, model);
+            //load.LoadXML(fileName, model);
         }
         catch (NullFileException ex) {
             JOptionPane.showMessageDialog(carsList, ex.getMessage());

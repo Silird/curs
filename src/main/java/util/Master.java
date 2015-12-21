@@ -5,6 +5,13 @@ public class Master implements Comparable<Master>{
     int KOD[];
     int emp, empMAX;
 
+    public Master(String n, int kod[], int emax) {
+        name = n;
+        KOD = kod;
+        emp = 0;
+        empMAX = emax;
+    }
+
     public Master(String n, int kod[], int e, int emax) {
         name = n;
         KOD = kod;
@@ -58,5 +65,12 @@ public class Master implements Comparable<Master>{
 
     public int compareTo(Master o) {
         return name.compareTo(o.getName());
+    }
+
+    public boolean equals(Master o) {
+        if (name.equals(o.getName())) {
+            return true;
+        }
+        return false;
     }
 }

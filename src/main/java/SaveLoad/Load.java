@@ -5,6 +5,8 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import util.DoubleMasterException;
+import util.WorkMasters;
 
 import javax.swing.table.DefaultTableModel;
 import javax.xml.parsers.DocumentBuilder;
@@ -15,24 +17,28 @@ import java.io.IOException;
 
 public class Load {
 
-    public void LoadXML(String fileName, DefaultTableModel model) {
+    public void LoadXML(String fileName, WorkMasters masters) {
         int i;
         try {
+            /*
             int rows = model.getRowCount();
             for (i = 0; i < rows; i++) {
                 model.removeRow(0);
             }
+            */
+            masters.Remove();
             DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document doc = dBuilder.parse(new File(fileName));
-            NodeList nlCars = doc.getElementsByTagName("car");
-            for (i = 0; i < nlCars.getLength(); i++) {
-                Node elem = nlCars.item(i);
+            NodeList nlMaster = doc.getElementsByTagName("master");
+            for (i = 0; i < nlMaster.getLength(); i++) {
+                Node elem = nlMaster.item(i);
                 NamedNodeMap attrs = elem.getAttributes();
-                String client = attrs.getNamedItem("client").getNodeValue();
-                String carName = attrs.getNamedItem("carname").getNodeValue();
-                String date = attrs.getNamedItem("date").getNodeValue();
-                String ready = attrs.getNamedItem("ready").getNodeValue();
-                model.addRow(new String[] {client, carName, date, ready});
+                masters.add(attrs.getNamedItem("name").getNodeValue(),
+                        new int[] {Integer.valueOf(attrs.getNamedItem("KOD1").getNodeValue()),
+                                Integer.valueOf(attrs.getNamedItem("KOD2").getNodeValue()),
+                                Integer.valueOf(attrs.getNamedItem("KOD3").getNodeValue())},
+                        Integer.valueOf(attrs.getNamedItem("emp").getNodeValue()),
+                        Integer.valueOf(attrs.getNamedItem("empMax").getNodeValue()));
             }
         }
         catch (SAXException ex) {
@@ -43,6 +49,8 @@ public class Load {
         }
         catch (ParserConfigurationException ex) {
             ex.printStackTrace();;
+        }
+        catch (DoubleMasterException ex) {
         }
     }
 }

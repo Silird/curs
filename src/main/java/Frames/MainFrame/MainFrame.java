@@ -3,6 +3,7 @@ package Frames.MainFrame;
 import Frames.MyTable;
 import Listeners.MainFrameListeners.ActionListeners.*;
 import Listeners.MainFrameListeners.MouseListeners.*;
+import SaveLoad.Load;
 import util.WorkMasters;
 
 import javax.swing.*;
@@ -137,7 +138,9 @@ public class MainFrame extends JFrame {
     }
 
     private void BaseInit() {
+        Load loadb = new Load();
         wm = new WorkMasters(masterModel);
+        loadb.LoadXML("D:\\Work\\Java\\Универ\\curs\\Сохранённые таблицы\\saved.xml", wm);
     }
 
 
@@ -147,7 +150,7 @@ public class MainFrame extends JFrame {
     private void ListenersInit() {
         //ActionListeners
         //Тулбар
-        exitBut.addActionListener(new ActionExitListener());
+        exitBut.addActionListener(new ActionExitListener(wm));
         saveBut.addActionListener(new ActionSaveListener(MainFrame.this, save, clientModel));
         openBut.addActionListener(new ActionLoadListener(MainFrame.this, load, clientModel));
         createBut.addActionListener(new ActionCreateListener(clientModel));

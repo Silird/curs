@@ -15,23 +15,35 @@ public class WorkMasters {
 
     private void RefreshModel() {
         String tmp[][];
-        int i, j;
-        tmp = masters.GiveStrings();
+        int i, rows;
+        tmp = masters.GiveStrings(false);
         if (tmp == null) {
             return;
         }
+        rows = model.getRowCount();
+        for (i = 0; i < rows; i++) {
+            model.removeRow(0);
+        }
         for (i = 0; i < tmp.length; i++) {
-            for (j = 0; j < tmp[i].length; j++) {
-                model.setValueAt(tmp[i][j], i, j);
-            }
+            model.addRow(tmp[i]);
         }
     }
 
-    public void add(String n, int kod[], int e, int emax) {
-        masters.add(new Master(n, kod, e, emax));
+    public void add(String n, int kod[], int emax) throws DoubleMasterException {
+        masters.add(new Master(n, kod, emax));
+        RefreshModel();
     }
 
-    public String[][] GiveStrings() {
-        return masters.GiveStrings();
+    public void add(String n, int kod[], int e, int emax) throws DoubleMasterException {
+        masters.add(new Master(n, kod, e, emax));
+        RefreshModel();
+    }
+
+    public void Remove() {
+        masters.Remove();
+    }
+
+    public String[][] GiveStrings(boolean forsave) {
+        return masters.GiveStrings(forsave);
     }
 }
