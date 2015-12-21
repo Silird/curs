@@ -12,9 +12,7 @@ import java.awt.*;
 /**
  * Конструктор формы
  */
-public class MainFrame extends JFrame{
-    //Форма
-    //protected JFrame carsList;
+public class MainFrame extends JFrame {
     //Таблица
     protected DefaultTableModel clientModel, masterModel;
     protected JScrollPane clientScroll, masterScroll;
@@ -23,27 +21,9 @@ public class MainFrame extends JFrame{
     //Тулбар
     protected JButton createBut, openBut, saveBut, printBut, exitBut;
     protected JToolBar toolBar;
-    //Фильтр
-    /*
-    protected MyComboBox client;
-    protected JTextField dateTake;
-    protected JButton filterBut;
-    protected JPanel filterPanel, clientPanel, carPanel, datePanel, checkPanel;
-    protected JCheckBox clientcheck, carcheck, datecheck, Checkcheck;
-    protected JComboBox comboCheck;
-    protected JLabel filterLabel;
-    protected JPanel eastPanel;
-    */
     //Диалоги сохранения-загрузки
     protected FileDialog save, load;
     //Интерфейс
-    /*
-    protected JTextField clientName, carName, date;
-    protected JLabel addLabel;
-    protected JCheckBox checkcar;
-    protected JButton addBut, removeBut, editBut, checkEditBut, undoBut;
-    protected JPanel southPanel, addLabelPanel, addPanel;
-    */
     private JButton addMasterBut;
     private JPanel interfacePanel;
 
@@ -57,24 +37,23 @@ public class MainFrame extends JFrame{
         FrameInit();
         ToolBarInit(); //Наверх формы
         TableInit();  //Посередине формы
-        //FilterInit();  //Справа формы
         SaveLoadDialogInit();
         InterfaceInit();  //Вниз формы
         BaseInit();
         ListenersInit();
 
-        MainFrame.this.setVisible(true);
+        setVisible(true);
     }
 
     /**
      * Инициализация главной формы
      */
     private void FrameInit() {
-        MainFrame.this.setName("Автомастерская");
-        MainFrame.this.setSize(700, 300);
-        MainFrame.this.setMinimumSize(new Dimension(700, 300));
-        MainFrame.this.setLocationRelativeTo(null);
-        MainFrame.this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Автомастерская");
+        setSize(700, 300);
+        setMinimumSize(new Dimension(700, 300));
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     /**
@@ -103,7 +82,7 @@ public class MainFrame extends JFrame{
         toolBar.add(printBut);
         toolBar.add(exitBut);
 
-        MainFrame.this.add(toolBar, BorderLayout.NORTH); //тулбар
+        add(toolBar, BorderLayout.NORTH); //тулбар
     }
 
     /**
@@ -127,61 +106,8 @@ public class MainFrame extends JFrame{
         tables.addTab("Основная информация", clientScroll);
         tables.addTab("Мастера", masterScroll);
 
-        MainFrame.this.add(tables, BorderLayout.CENTER); //Таблицы
+        add(tables, BorderLayout.CENTER); //Таблицы
     }
-
-    /**
-     * Инициализация поля фильтра
-     */
-    /*
-    private void FilterInit() {
-        client = new MyComboBox(clientModel);
-        clientcheck = new JCheckBox();
-        clientPanel = new JPanel();
-        clientPanel.setLayout(new BoxLayout(clientPanel, BoxLayout.X_AXIS));
-        clientPanel.add(clientcheck);
-        clientPanel.add(client);
-
-        carName = new JTextField("Марка машины");
-        carName.setColumns(12);
-        carcheck = new JCheckBox();
-        carPanel = new JPanel();
-        carPanel.setLayout(new BoxLayout(carPanel, BoxLayout.X_AXIS));
-        carPanel.add(carcheck);
-        carPanel.add(carName);
-
-        dateTake = new JTextField("Дата");
-        dateTake.setColumns(12);
-        datecheck = new JCheckBox();
-        datePanel = new JPanel();
-        datePanel.setLayout(new BoxLayout(datePanel, BoxLayout.X_AXIS));
-        datePanel.add(datecheck);
-        datePanel.add(dateTake);
-
-        comboCheck = new JComboBox(new String[] {"Готовность", "Готово", "Не готово"});
-        Checkcheck = new JCheckBox();
-        checkPanel = new JPanel();
-        checkPanel.setLayout(new BoxLayout(checkPanel, BoxLayout.X_AXIS));
-        checkPanel.add(Checkcheck);
-        checkPanel.add(comboCheck);
-
-        filterLabel = new JLabel("Поиск");
-        filterBut = new JButton(new ImageIcon(getClass().getResource("/pictures/filter.png")));
-        filterPanel = new JPanel();
-        filterPanel.setLayout(new BoxLayout(filterPanel, BoxLayout.Y_AXIS));
-        filterPanel.add(filterLabel);
-        filterPanel.add(clientPanel);
-        filterPanel.add(carPanel);
-        filterPanel.add(datePanel);
-        filterPanel.add(checkPanel);
-        filterPanel.add(new JLabel(" "));
-        filterPanel.add(filterBut);
-        eastPanel = new JPanel();
-        eastPanel.add(filterPanel, BorderLayout.NORTH);
-
-        carsList.add(eastPanel, BorderLayout.EAST); //Фильтр
-    }
-    */
 
     /**
      * Инициализация save- и load-диалогов
@@ -199,7 +125,6 @@ public class MainFrame extends JFrame{
     /**
      * Инициализация интерфейса
      */
-
     private void InterfaceInit() {
         interfacePanel = new JPanel();
         interfacePanel.setLayout(new BoxLayout(interfacePanel, BoxLayout.X_AXIS));
@@ -208,58 +133,7 @@ public class MainFrame extends JFrame{
 
         interfacePanel.add(addMasterBut);
 
-        MainFrame.this.add(interfacePanel, BorderLayout.SOUTH);
-        /*
-        addPanel = new JPanel();
-        addPanel.setLayout(new BoxLayout(addPanel, BoxLayout.X_AXIS));
-        addLabel = new JLabel("Работа с таблицей");
-
-        addLabelPanel = new JPanel();
-        addLabelPanel.add(addLabel);
-
-        southPanel = new JPanel();
-        southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.Y_AXIS));
-        southPanel.add(addLabelPanel);
-
-        clientName = new JTextField("Клиент");
-
-        carName = new JTextField("Марка машины");
-
-        date = new JTextField("Дата");
-
-        checkcar = new JCheckBox("Готовность");
-
-        addBut = new JButton(new ImageIcon(getClass().getResource("/pictures/add.png")));
-        addBut.setToolTipText("Добавить элемент в таблицу");
-
-        removeBut = new JButton(new ImageIcon(getClass().getResource("/pictures/remove.png")));
-        removeBut.setToolTipText("Удалить выбранные строки из таблицы");
-
-        editBut = new JButton(new ImageIcon(getClass().getResource("/pictures/edit.png")));
-        editBut.setToolTipText("Редактировать выбранную строку таблицы");
-
-        checkEditBut = new JButton(new ImageIcon(getClass().getResource("/pictures/add.png")));
-        checkEditBut.setToolTipText("Принять редактирование");
-        checkEditBut.setVisible(false);
-
-        undoBut = new JButton(new ImageIcon(getClass().getResource("/pictures/undo.png")));
-        undoBut.setToolTipText("Отменить редактирование");
-        undoBut.setVisible(false);
-
-        addPanel.add(clientName);
-        addPanel.add(carName);
-        addPanel.add(date);
-        addPanel.add(checkcar);
-        addPanel.add(addBut);
-        addPanel.add(checkEditBut);
-        addPanel.add(editBut);
-        addPanel.add(undoBut);
-        addPanel.add(removeBut);
-
-        southPanel.add(addPanel);
-
-        carsList.add(southPanel, BorderLayout.SOUTH); //Интерфейс
-        */
+        add(interfacePanel, BorderLayout.SOUTH);
     }
 
     private void BaseInit() {
@@ -272,8 +146,6 @@ public class MainFrame extends JFrame{
      */
     private void ListenersInit() {
         //ActionListeners
-        //Фильтр
-        //filterBut.addActionListener(new ActionFilterListener(carsList, carName, client));
         //Тулбар
         exitBut.addActionListener(new ActionExitListener());
         saveBut.addActionListener(new ActionSaveListener(MainFrame.this, save, clientModel));
@@ -300,8 +172,6 @@ public class MainFrame extends JFrame{
         date.addFocusListener(new FocusAddDateListener(date));
         carName.addFocusListener(new FocusBNameListener(carName));
         */
-        //Фильтр
-        //dateTake.addFocusListener(new FocusAddDateListener(dateTake));
 
         //MouseListeners
         //Интерфейс
@@ -318,7 +188,5 @@ public class MainFrame extends JFrame{
         printBut.addMouseListener(new MousePrintListener(printBut));                        // (~(")(")
         exitBut.addMouseListener(new MouseExitListener(exitBut));
         createBut.addMouseListener(new MouseCreateListener(createBut));
-        //Фильтр
-        //filterBut.addMouseListener(new MouseFilterListener(filterBut));
     }
 }
