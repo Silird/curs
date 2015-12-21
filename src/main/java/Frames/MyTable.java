@@ -1,4 +1,4 @@
-package MainFrame;
+package Frames;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -6,14 +6,14 @@ import javax.swing.table.DefaultTableModel;
 /**
  * Таблица, которую нельзя редактировать напрямую
  */
-public class ClientTable extends JTable {
+public class MyTable extends JTable {
 
     /**
      * Конструктор таблицы, не отличается от JTable
      * m - заданая модель
      * @param m
      */
-    public ClientTable(DefaultTableModel m) {
+    public MyTable(DefaultTableModel m) {
         super(m);
     }
 

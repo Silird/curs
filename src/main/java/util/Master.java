@@ -1,6 +1,6 @@
 package util;
 
-public class Master {
+public class Master implements Comparable<Master>{
     String name;
     int KOD[];
     int emp, empMAX;
@@ -38,5 +38,25 @@ public class Master {
             }
         }
         return -1;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int[] getKOD() {
+        return KOD;
+    }
+
+    public int getEmp() {
+        return emp;
+    }
+
+    public int getEmpMAX() {
+        return empMAX;
+    }
+
+    public int compareTo(Master o) {
+        return name.compareTo(o.getName());
     }
 }

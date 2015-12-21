@@ -141,7 +141,7 @@ public class ActionAcceptListener implements ActionListener {
     }
 
     /**
-     * Проверка на содержании в таблице model комбинации автор(aN) и название книги(bN)
+     * Проверка на содержании в таблице clientModel комбинации автор(aN) и название книги(bN)
      * Sel показывает статус наличия книги
      * @param model
      * @param clientN

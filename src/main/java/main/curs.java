@@ -1,11 +1,11 @@
 package main;
 
 
-import MainFrame.MyFrame;
+import Frames.MainFrame.MainFrame;
 
 public class curs {
 
     public static void main(String[] args) {
-        new MyFrame().show();
+        new MainFrame().Show();
     }
 }

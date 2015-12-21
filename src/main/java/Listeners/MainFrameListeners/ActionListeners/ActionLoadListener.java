@@ -1,5 +1,6 @@
 package Listeners.MainFrameListeners.ActionListeners;
 
+import SaveLoad.Load;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
@@ -21,7 +22,6 @@ import java.io.IOException;
  * Обработка события нажатия на кнопку загрузки
  */
 public class ActionLoadListener implements ActionListener {
-
     protected JFrame carsList;
     protected FileDialog load;
     protected DefaultTableModel model;
@@ -55,19 +55,27 @@ public class ActionLoadListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         load.setVisible(true);
         String fileName = load.getDirectory() + load.getFile();
-        LoadXML(fileName);
-        load.setFile("*.xml");
-    }
-
-    public void LoadXML(String fileName) {
-        int i;
         try {
             if (load.getFile() == null) {
                 throw new NullFileException();
             }
-            int rows = model.getRowCount();
+            //LoadXML(fileName);
+            Load load = new Load();
+            load.LoadXML(fileName, model);
+        }
+        catch (NullFileException ex) {
+            JOptionPane.showMessageDialog(carsList, ex.getMessage());
+        }
+        load.setFile("*.xml");
+    }
+
+    /*
+    public void LoadXML(String fileName) {
+        int i;
+        try {
+            int rows = clientModel.getRowCount();
             for (i = 0; i < rows; i++) {
-                model.removeRow(0);
+                clientModel.removeRow(0);
             }
             DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document doc = dBuilder.parse(new File(fileName));
@@ -79,20 +87,18 @@ public class ActionLoadListener implements ActionListener {
                 String carName = attrs.getNamedItem("carname").getNodeValue();
                 String date = attrs.getNamedItem("date").getNodeValue();
                 String ready = attrs.getNamedItem("ready").getNodeValue();
-                model.addRow(new String[] {client, carName, date, ready});
+                clientModel.addRow(new String[] {client, carName, date, ready});
             }
         }
-        catch (NullFileException ex) {
-            JOptionPane.showMessageDialog(carsList, ex.getMessage());
-        }
         catch (SAXException ex) {
-            JOptionPane.showMessageDialog(carsList, ex.getMessage());
+            ex.printStackTrace();
         }
         catch (IOException ex) {
-            JOptionPane.showMessageDialog(carsList, ex.getMessage());
+            ex.printStackTrace();;
         }
         catch (ParserConfigurationException ex) {
-            JOptionPane.showMessageDialog(carsList, ex.getMessage());
+            ex.printStackTrace();;
         }
     }
+    */
 }
