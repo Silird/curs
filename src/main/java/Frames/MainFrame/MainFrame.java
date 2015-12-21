@@ -5,6 +5,7 @@ import Listeners.MainFrameListeners.ActionListeners.*;
 import Listeners.MainFrameListeners.MouseListeners.*;
 import SaveLoad.Load;
 import util.WorkMasters;
+import util.WorkRecords;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -15,9 +16,9 @@ import java.awt.*;
  */
 public class MainFrame extends JFrame {
     //Таблица
-    protected DefaultTableModel clientModel, masterModel;
-    protected JScrollPane clientScroll, masterScroll;
-    protected MyTable clientTable, masterTable;
+    protected DefaultTableModel clientModel, masterModel, adminModel;
+    protected JScrollPane clientScroll, masterScroll, adminScroll;
+    protected MyTable clientTable, masterTable, adminTable;
     protected JTabbedPane tables;
     //Тулбар
     protected JButton createBut, openBut, saveBut, printBut, exitBut;
@@ -30,6 +31,7 @@ public class MainFrame extends JFrame {
 
     //База
     private WorkMasters wm;
+    private WorkRecords wr;
 
     /**
      * Инициализация всех элементов и отображение формы на экране
@@ -90,21 +92,25 @@ public class MainFrame extends JFrame {
      * Инициализация таблицы
      */
     private void TableInit() {
-        String columns[] = {"Клиент", "Марка машины", "Дата сдачи", "Готовность"};
-        String data[][] = {{"Салимов Анушервон", "Bugatti Veyron", "20.08.2015", "Готово"},
-                {"Быков Андрей", "Москвич 412", "25.08.2015", "Не готово"}};
-        clientModel = new DefaultTableModel(data, columns);
+        String columns[] = {"Клиент", "Марка машины", "Вид работы", "Готовность"};
+        clientModel = new DefaultTableModel(null, columns);
         clientTable = new MyTable(clientModel);
         clientScroll = new JScrollPane(clientTable);
 
-        String columns1[] = {"Имя мастера", "Специализация", "Доп. специализация №1",
+        String columns1[] = {"Клиент", "Мастер", "Вид работы", "Описание неисправности"};
+        adminModel = new DefaultTableModel(null, columns);
+        adminTable = new MyTable(adminModel);
+        adminScroll = new JScrollPane(adminTable);
+
+        String columns2[] = {"Имя мастера", "Специализация", "Доп. специализация №1",
                 "Доп. специализация №1", "Загруженность", "Max загруженность"};
-        masterModel = new DefaultTableModel(null, columns1);
+        masterModel = new DefaultTableModel(null, columns2);
         masterTable = new MyTable(masterModel);
         masterScroll = new JScrollPane(masterTable);
 
         tables = new JTabbedPane();
         tables.addTab("Основная информация", clientScroll);
+        tables.addTab("Дополнительная информация", adminScroll);
         tables.addTab("Мастера", masterScroll);
 
         add(tables, BorderLayout.CENTER); //Таблицы
@@ -143,6 +149,7 @@ public class MainFrame extends JFrame {
     private void BaseInit() {
         Load loadb = new Load();
         wm = new WorkMasters(masterModel);
+        wr = new WorkRecords(clientModel, adminModel);
         loadb.LoadXML("D:\\Work\\Java\\Универ\\curs\\Сохранённые таблицы\\saved.xml", wm);
     }
 
@@ -160,35 +167,8 @@ public class MainFrame extends JFrame {
         //Интерфейс
         addMasterBut.addActionListener(new ActionAddMasterListener(MainFrame.this, wm));
         removeMasterBut.addActionListener(new ActionRemoveMasterListener(MainFrame.this, tables, masterTable, wm));
-        /*
-        addBut.addActionListener(new ActionAddListener(carsList, clientModel, clientName, carName, date, checkcar));
-        removeBut.addActionListener(new ActionRemoveListener(carsList, clientModel, clientTable));
-        editBut.addActionListener(new ActionEditListener(carsList, clientModel, clientTable, addBut, checkEditBut,
-                editBut, undoBut, removeBut, clientName, carName, date, checkcar));
-        undoBut.addActionListener(new ActionUndoListener(carsList, clientModel, clientTable, addBut, checkEditBut,
-                editBut, undoBut, removeBut, clientName, carName, date, checkcar));
-        checkEditBut.addActionListener(new ActionAcceptListener(carsList, clientModel, clientTable, addBut, checkEditBut,
-                editBut, undoBut, removeBut, clientName, carName, date, checkcar));
-        */
-
-        //FocusListeners
-        //Интерфейс
-        /*
-        clientName.addFocusListener(new FocusAddclientNameListener(clientName));
-        carName.addFocusListener(new FocusAddcarNameListener(carName));
-        date.addFocusListener(new FocusAddDateListener(date));
-        carName.addFocusListener(new FocusBNameListener(carName));
-        */
 
         //MouseListeners
-        //Интерфейс
-        /*
-        removeBut.addMouseListener(new MouseRemoveListener(removeBut));
-        addBut.addMouseListener(new MouseAddListener(addBut));
-        editBut.addMouseListener(new MouseEditListener(editBut));
-        checkEditBut.addMouseListener(new MouseAddListener(checkEditBut));
-        undoBut.addMouseListener(new MouseUndoListener(undoBut));
-        */
         //Тулбар
         saveBut.addMouseListener(new MouseSaveListener(saveBut));                           // (\(\
         openBut.addMouseListener(new MouseOpenListener(openBut));                           // (>'•')

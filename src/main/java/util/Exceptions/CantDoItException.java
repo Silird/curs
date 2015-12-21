@@ -1,4 +1,4 @@
-package util;
+package util.Exceptions;
 
 /**
  * Ситуация, когда никто не может взять машину с данной поломкой

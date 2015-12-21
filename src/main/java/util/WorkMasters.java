@@ -1,6 +1,9 @@
 package util;
 
 
+import util.Exceptions.DoubleMasterException;
+import util.Exceptions.MasterEmploedExeption;
+
 import javax.swing.table.DefaultTableModel;
 
 public class WorkMasters {

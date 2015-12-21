@@ -1,6 +1,6 @@
 package Listeners.MasterFrameListeners.ActionListeners;
 
-import util.DoubleMasterException;
+import util.Exceptions.DoubleMasterException;
 import util.WorkMasters;
 
 import javax.swing.*;

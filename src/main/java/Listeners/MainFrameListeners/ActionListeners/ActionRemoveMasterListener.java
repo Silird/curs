@@ -1,8 +1,7 @@
 package Listeners.MainFrameListeners.ActionListeners;
 
-import Frames.MainFrame.MainFrame;
 import Frames.MyTable;
-import util.MasterEmploedExeption;
+import util.Exceptions.MasterEmploedExeption;
 import util.WorkMasters;
 
 import javax.swing.*;

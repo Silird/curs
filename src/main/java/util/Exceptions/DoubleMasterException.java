@@ -1,4 +1,4 @@
-package util;
+package util.Exceptions;
 
 public class DoubleMasterException extends Exception {
     public DoubleMasterException() {
