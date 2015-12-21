@@ -25,7 +25,7 @@ public class MainFrame extends JFrame {
     //Диалоги сохранения-загрузки
     protected FileDialog save, load;
     //Интерфейс
-    private JButton addMasterBut;
+    private JButton addMasterBut, removeMasterBut;
     private JPanel interfacePanel;
 
     //База
@@ -132,7 +132,10 @@ public class MainFrame extends JFrame {
 
         addMasterBut = new JButton("Добавить мастера");
 
+        removeMasterBut = new JButton("Удалить мастера");
+
         interfacePanel.add(addMasterBut);
+        interfacePanel.add(removeMasterBut);
 
         add(interfacePanel, BorderLayout.SOUTH);
     }
@@ -156,6 +159,7 @@ public class MainFrame extends JFrame {
         createBut.addActionListener(new ActionCreateListener(clientModel));
         //Интерфейс
         addMasterBut.addActionListener(new ActionAddMasterListener(MainFrame.this, wm));
+        removeMasterBut.addActionListener(new ActionRemoveMasterListener(MainFrame.this, tables, masterTable, wm));
         /*
         addBut.addActionListener(new ActionAddListener(carsList, clientModel, clientName, carName, date, checkcar));
         removeBut.addActionListener(new ActionRemoveListener(carsList, clientModel, clientTable));

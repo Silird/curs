@@ -43,6 +43,11 @@ public class WorkMasters {
         masters.Remove();
     }
 
+    public void Remove(int row) throws MasterEmploedExeption {
+        masters.Remove(model.getValueAt(row, 0).toString());
+        RefreshModel();
+    }
+
     public String[][] GiveStrings(boolean forsave) {
         return masters.GiveStrings(forsave);
     }

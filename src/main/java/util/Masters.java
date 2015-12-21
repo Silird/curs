@@ -120,4 +120,21 @@ public class Masters {
             it = records.iterator();
         }
     }
+
+    public void Remove(String name) throws MasterEmploedExeption {
+        Iterator<Master> it = records.iterator();
+        Master tmpMaster;
+        while (it.hasNext()) {
+            tmpMaster = it.next();
+            if (tmpMaster.getName().equals(name)) {
+                if (tmpMaster.getEmp() == 0) {
+                    records.remove(tmpMaster);
+                    return;
+                }
+                else {
+                    throw new MasterEmploedExeption();
+                }
+            }
+        }
+    }
 }
