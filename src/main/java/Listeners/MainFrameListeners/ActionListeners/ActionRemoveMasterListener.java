@@ -41,7 +41,7 @@ public class ActionRemoveMasterListener implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         try {
-            if (tables.getSelectedIndex() != 1) {
+            if (tables.getSelectedIndex() != 2) {
                 throw new NotSelectedTableException();
             }
             if (table.getSelectedRowCount() == 0) {

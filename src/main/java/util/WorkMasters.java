@@ -20,12 +20,13 @@ public class WorkMasters {
         String tmp[][];
         int i, rows;
         tmp = masters.GiveStrings(false);
-        if (tmp == null) {
-            return;
-        }
         rows = model.getRowCount();
         for (i = 0; i < rows; i++) {
             model.removeRow(0);
+        }
+        if (tmp == null) {
+
+            return;
         }
         for (i = 0; i < tmp.length; i++) {
             model.addRow(tmp[i]);
@@ -44,6 +45,7 @@ public class WorkMasters {
 
     public void Remove() {
         masters.Remove();
+        RefreshModel();
     }
 
     public void Remove(int row) throws MasterEmploedExeption {

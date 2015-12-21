@@ -163,7 +163,7 @@ public class MainFrame extends JFrame {
         exitBut.addActionListener(new ActionExitListener(wm));
         saveBut.addActionListener(new ActionSaveListener(MainFrame.this, save, clientModel));
         openBut.addActionListener(new ActionLoadListener(MainFrame.this, load, clientModel));
-        createBut.addActionListener(new ActionCreateListener(clientModel));
+        createBut.addActionListener(new ActionCreateListener(wm, wr));
         //Интерфейс
         addMasterBut.addActionListener(new ActionAddMasterListener(MainFrame.this, wm));
         removeMasterBut.addActionListener(new ActionRemoveMasterListener(MainFrame.this, tables, masterTable, wm));

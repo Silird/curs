@@ -22,13 +22,13 @@ public class WorkRecords {
         int i, rows;
         tmp1 = records.GiveClientStrings();
         tmp2 = records.GiveAdminStrings();
-        if (tmp1 == null) {
-            return;
-        }
         rows = clientModel.getRowCount();
         for (i = 0; i < rows; i++) {
             clientModel.removeRow(0);
             adminModel.removeRow(0);
+        }
+        if (tmp1 == null) {
+            return;
         }
         for (i = 0; i < tmp1.length; i++) {
             clientModel.addRow(tmp1[i]);
@@ -48,6 +48,7 @@ public class WorkRecords {
 
     public void Remove() {
         records.Remove();
+        RefreshModels();
     }
 
     public void Remove(int row) throws CarNotReadyExeption {

@@ -38,7 +38,7 @@ public class MasterFrame extends JDialog {
 
     private void FrameInit(JFrame owner) {
         setTitle("Добавление мастера");
-        setSize(500, 320);
+        setSize(500, 250);
         setResizable(false);
         setLocationRelativeTo(owner);
         setModalityType(ModalityType.TOOLKIT_MODAL);

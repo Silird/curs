@@ -1,5 +1,8 @@
 package Listeners.MainFrameListeners.ActionListeners;
 
+import util.WorkMasters;
+import util.WorkRecords;
+
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,14 +12,12 @@ import java.awt.event.ActionListener;
  */
 
 public class ActionCreateListener implements ActionListener {
-    protected DefaultTableModel model;
+    private WorkMasters masters;
+    private WorkRecords records;
 
-    /**
-     * Конструктор
-     * @param m
-     */
-    public ActionCreateListener(DefaultTableModel m) {
-        model = m;
+    public ActionCreateListener(WorkMasters m, WorkRecords r) {
+        masters = m;
+        records = r;
     }
 
     /**
@@ -24,10 +25,7 @@ public class ActionCreateListener implements ActionListener {
      * @param e
      */
     public void actionPerformed(ActionEvent e) {
-        int i, rows;
-        rows = model.getRowCount();
-        for (i = 0; i < rows; i++) {
-            model.removeRow(0);
-        }
+        masters.Remove();
+        records.Remove();
     }
 }
