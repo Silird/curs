@@ -1,4 +1,4 @@
-package Listeners.MasterFrameListeners.ActionListeners;
+package Listeners.MasterFrameListeners;
 
 import util.Exceptions.DoubleMasterException;
 import util.WorkMasters;
@@ -8,14 +8,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class ActionAddListener implements ActionListener {
+public class ActionMasterAddListener implements ActionListener {
     private JDialog mframe;
     private JTextField nameField, empMaxField;
     private JComboBox KOD1Box, KOD2Box, KOD3Box;
     private WorkMasters mastersList;
 
-    public ActionAddListener(JDialog mf, JTextField nf, JTextField emf, JComboBox k1,
-                             JComboBox k2, JComboBox k3, WorkMasters ml) {
+    public ActionMasterAddListener(JDialog mf, JTextField nf, JTextField emf, JComboBox k1,
+                                   JComboBox k2, JComboBox k3, WorkMasters ml) {
         mframe = mf;
         nameField = nf;
         empMaxField = emf;

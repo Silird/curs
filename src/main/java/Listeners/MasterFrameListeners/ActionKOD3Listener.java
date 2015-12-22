@@ -1,4 +1,4 @@
-package Listeners.MasterFrameListeners.ActionListeners;
+package Listeners.MasterFrameListeners;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

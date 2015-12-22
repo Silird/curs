@@ -1,13 +1,13 @@
-package Listeners.MasterFrameListeners.ActionListeners;
+package Listeners.MasterFrameListeners;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ActionCancelListener implements ActionListener {
+public class ActionMasterCancelListener implements ActionListener {
     private JDialog mframe;
 
-    public ActionCancelListener(JDialog mf) {
+    public ActionMasterCancelListener(JDialog mf) {
         mframe = mf;
     }
 

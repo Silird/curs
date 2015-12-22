@@ -1,6 +1,6 @@
 package Listeners.MainFrameListeners.ActionListeners;
 
-import Frames.MasterFrame.MasterFrame;
+import Frames.MasterFrame;
 import util.WorkMasters;
 
 import javax.swing.*;

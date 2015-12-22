@@ -1,7 +1,7 @@
 package main;
 
 
-import Frames.MainFrame.MainFrame;
+import Frames.MainFrame;
 
 public class curs {
 

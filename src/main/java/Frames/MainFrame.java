@@ -1,6 +1,5 @@
-package Frames.MainFrame;
+package Frames;
 
-import Frames.MyTable;
 import Listeners.MainFrameListeners.ActionListeners.*;
 import Listeners.MainFrameListeners.MouseListeners.*;
 import SaveLoad.Load;
@@ -26,7 +25,7 @@ public class MainFrame extends JFrame {
     //Диалоги сохранения-загрузки
     protected FileDialog save, load;
     //Интерфейс
-    private JButton addMasterBut, removeMasterBut;
+    private JButton addMasterBut, removeMasterBut, addClientBut, removeClientBut;
     private JPanel interfacePanel;
 
     //База
@@ -140,6 +139,12 @@ public class MainFrame extends JFrame {
 
         removeMasterBut = new JButton("Удалить мастера");
 
+        addClientBut = new JButton("Добавить заявку");
+
+        removeClientBut = new JButton("Выписать заявку");
+
+        interfacePanel.add(addClientBut);
+        interfacePanel.add(removeClientBut);
         interfacePanel.add(addMasterBut);
         interfacePanel.add(removeMasterBut);
 
@@ -167,6 +172,7 @@ public class MainFrame extends JFrame {
         //Интерфейс
         addMasterBut.addActionListener(new ActionAddMasterListener(MainFrame.this, wm));
         removeMasterBut.addActionListener(new ActionRemoveMasterListener(MainFrame.this, tables, masterTable, wm));
+        addClientBut.addActionListener(new ActionAddClientListener(MainFrame.this, wm, wr));
 
         //MouseListeners
         //Тулбар

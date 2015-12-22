@@ -1,10 +1,10 @@
-package Frames.MasterFrame;
+package Frames;
 
 
-import Listeners.MasterFrameListeners.ActionListeners.ActionAddListener;
-import Listeners.MasterFrameListeners.ActionListeners.ActionCancelListener;
-import Listeners.MasterFrameListeners.ActionListeners.ActionKOD2Listener;
-import Listeners.MasterFrameListeners.ActionListeners.ActionKOD3Listener;
+import Listeners.MasterFrameListeners.ActionMasterAddListener;
+import Listeners.MasterFrameListeners.ActionMasterCancelListener;
+import Listeners.MasterFrameListeners.ActionKOD2Listener;
+import Listeners.MasterFrameListeners.ActionKOD3Listener;
 import util.WorkMasters;
 
 import javax.swing.*;
@@ -97,9 +97,9 @@ public class MasterFrame extends JDialog {
     }
 
     private void ListenersInit() {
-        addBut.addActionListener(new ActionAddListener(MasterFrame.this, nameField, empMaxField,
+        addBut.addActionListener(new ActionMasterAddListener(MasterFrame.this, nameField, empMaxField,
                 KOD1Box, KOD2Box, KOD3Box, mastersList));
-        cancelBut.addActionListener(new ActionCancelListener(MasterFrame.this));
+        cancelBut.addActionListener(new ActionMasterCancelListener(MasterFrame.this));
         KOD2Box.addActionListener(new ActionKOD2Listener(MasterFrame.this, KOD1Box, KOD2Box));
         KOD3Box.addActionListener(new ActionKOD3Listener(MasterFrame.this, KOD1Box, KOD2Box, KOD3Box));
     }
