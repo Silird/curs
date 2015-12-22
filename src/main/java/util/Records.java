@@ -8,6 +8,9 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
+/**
+ * Множество записей и работа с ним
+ */
 public class Records {
     Set<Record> records;
 
@@ -15,6 +18,11 @@ public class Records {
         records = new TreeSet<Record>();
     }
 
+    /**
+     * Возвращает истину, если множество содержит данную запись
+     * @param o
+     * @return
+     */
     public boolean contain(Record o) {
         Iterator<Record> it = records.iterator();
         while(it.hasNext()) {
@@ -25,6 +33,9 @@ public class Records {
         return false;
     }
 
+    /**
+     * @return количество элементов в множестве
+     */
     public int Kolvo() {
         int i;
         Iterator<Record> it = records.iterator();
@@ -36,6 +47,11 @@ public class Records {
         return i;
     }
 
+    /**
+     * Добавление новой записи
+     * @param r
+     * @throws DoubleClientException если запись уже существует
+     */
     public void add(Record r) throws DoubleClientException {
         if (!contain(r)) {
             records.add(r);
@@ -45,6 +61,10 @@ public class Records {
         }
     }
 
+    /**
+     * Возвращает данные множества в табличном виде строк для заполнения основной таблицы
+     * @return
+     */
     public String[][] GiveClientStrings() {
         if (Kolvo() == 0) {
             return null;
@@ -70,6 +90,10 @@ public class Records {
         return tmp;
     }
 
+    /**
+     * Возвращает данные множества в табличном виде строк для заполнения дополнительной таблицы
+     * @return
+     */
     public String[][] GiveAdminStrings() {
         if (Kolvo() == 0) {
             return null;
@@ -82,7 +106,12 @@ public class Records {
         while (it.hasNext()) {
             tmpRecord = it.next();
             tmp[i][0] = tmpRecord.getClient();
-            tmp[i][1] = tmpRecord.getMaster().getName();
+            if (tmpRecord.getMaster() != null) {
+                tmp[i][1] = tmpRecord.getMaster().getName();
+            }
+            else {
+                tmp[i][1] = "Уволен";
+            }
             tmp[i][2] = KODToString(tmpRecord.getKOD());
             tmp[i][3] = tmpRecord.getBreacking();
             i++;
@@ -90,6 +119,11 @@ public class Records {
         return tmp;
     }
 
+    /**
+     * Возвращает данные множества в табличном виде строк для сохранения в файл
+     * готовность и вид работы, не переводятся в читабельный вид
+     * @return
+     */
     public String[][] GiveSaveStrings() {
         if (Kolvo() == 0) {
             return null;
@@ -105,13 +139,23 @@ public class Records {
             tmp[i][1] = tmpRecord.getCar();
             tmp[i][2] = String.valueOf(tmpRecord.getKOD());
             tmp[i][3] = tmpRecord.getBreacking();
-            tmp[i][4] = tmpRecord.getMaster().getName();
+            if (tmpRecord.getMaster() != null) {
+                tmp[i][4] = tmpRecord.getMaster().getName();
+            }
+            else {
+                tmp[i][4] = "Уволен";
+            }
             tmp[i][5] = String.valueOf(tmpRecord.isReady());
             i++;
         }
         return tmp;
     }
 
+    /**
+     * Возвращает описание вида работы по коду
+     * @param KOD
+     * @return
+     */
     public String KODToString(int KOD) {
         switch (KOD) {
             case 1: {
@@ -135,6 +179,9 @@ public class Records {
         }
     }
 
+    /**
+     * Удаление базы данных
+     */
     public void Remove() {
         Iterator<Record> it;
         it = records.iterator();
@@ -144,6 +191,11 @@ public class Records {
         }
     }
 
+    /**
+     * Удаление элемента базы данных по имени клиента
+     * @param name
+     * @throws CarNotReadyExeption если машина не готова ещё
+     */
     public void Remove(String name) throws CarNotReadyExeption {
         Iterator<Record> it = records.iterator();
         Record tmpRecord;
@@ -159,6 +211,11 @@ public class Records {
         }
     }
 
+    /**
+     * Установить готовность машины
+     * @param client
+     * @throws AlreadyDoneException если машину уже готова
+     */
     public void setReady(String client)  throws AlreadyDoneException {
         Iterator<Record> it = records.iterator();
         Record tmp;

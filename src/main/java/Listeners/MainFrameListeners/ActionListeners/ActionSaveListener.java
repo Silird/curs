@@ -26,8 +26,8 @@ import java.io.IOException;
  * Обработчик нажатия кнопки сохранить
  */
 public class ActionSaveListener implements ActionListener {
-    protected JFrame carsList;
-    protected FileDialog save;
+    private JFrame carsList;
+    private FileDialog save;
     private WorkMasters masters;
     private WorkRecords records;
 

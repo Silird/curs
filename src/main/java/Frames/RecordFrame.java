@@ -8,6 +8,9 @@ import util.WorkRecords;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Модальная форма заполнения данных для заявки
+ */
 public class RecordFrame extends JDialog {
     //Базы данных
     private WorkMasters masters;
@@ -29,6 +32,10 @@ public class RecordFrame extends JDialog {
         Show(owner);
     }
 
+    /**
+     * Отображение формы
+     * @param owner
+     */
     public void Show(JFrame owner) {
         FrameInit(owner);
         EnterPanelInit(); //Посередине
@@ -37,6 +44,10 @@ public class RecordFrame extends JDialog {
         setVisible(true);
     }
 
+    /**
+     * Инициализация формы
+     * @param owner
+     */
     private void FrameInit(JFrame owner) {
         setTitle("Запись клиента");
         setSize(500, 250);
@@ -46,6 +57,9 @@ public class RecordFrame extends JDialog {
         setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
 
+    /**
+     * Инициализация панелек ввода данных
+     */
     private void EnterPanelInit() {
         clientLabel = new JLabel("Имя клиента");
         clientField = new JTextField(20);
@@ -86,6 +100,9 @@ public class RecordFrame extends JDialog {
         add(enterPanel, BorderLayout.CENTER);
     }
 
+    /**
+     * Инициализация кнопок
+     */
     private void ButtonsInit() {
         addBut = new JButton("Добавить");
         addBut.setToolTipText("Добавить новую заявку");
@@ -100,6 +117,9 @@ public class RecordFrame extends JDialog {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Инициализация слушателей
+     */
     private void ListenersInit() {
         addBut.addActionListener(new ActionRecordAddListener(RecordFrame.this, clientField, carField, KODBox,
                 breackingField, masters, records));

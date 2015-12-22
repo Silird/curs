@@ -8,9 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Действие по нжатию на кнопку выхода
+ * Действие по нажатию на кнопку выхода, сохранение базы данных
  */
-
 public class ActionExitListener implements ActionListener {
     private WorkMasters masters;
     private WorkRecords records;

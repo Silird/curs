@@ -10,6 +10,9 @@ import util.WorkMasters;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Модальное окно
+ */
 public class MasterFrame extends JDialog {
     //База мастеров
     private WorkMasters mastersList;
@@ -28,6 +31,10 @@ public class MasterFrame extends JDialog {
         Show(owner);
     }
 
+    /**
+     * Отображение формы
+     * @param owner
+     */
     public void Show(JFrame owner) {
         FrameInit(owner);
         EnterPanelInit(); //Посередине
@@ -36,6 +43,10 @@ public class MasterFrame extends JDialog {
         setVisible(true);
     }
 
+    /**
+     * Инициализация формы
+     * @param owner
+     */
     private void FrameInit(JFrame owner) {
         setTitle("Добавление мастера");
         setSize(500, 250);
@@ -45,6 +56,9 @@ public class MasterFrame extends JDialog {
         setDefaultCloseOperation(HIDE_ON_CLOSE);
     }
 
+    /**
+     * Инициализация панелек ввода данных
+     */
     private void EnterPanelInit() {
         nameLabel = new JLabel("Имя мастера");
         nameField = new JTextField(20);
@@ -82,6 +96,9 @@ public class MasterFrame extends JDialog {
         add(enterPanel, BorderLayout.CENTER);
     }
 
+    /**
+     * Инициализация Кнопок
+     */
     private void ButtonsInit() {
         addBut = new JButton("Добавить");
         addBut.setToolTipText("Добавить нового мастера");
@@ -96,6 +113,9 @@ public class MasterFrame extends JDialog {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Инициализация слушателей
+     */
     private void ListenersInit() {
         addBut.addActionListener(new ActionMasterAddListener(MasterFrame.this, nameField, empMaxField,
                 KOD1Box, KOD2Box, KOD3Box, mastersList));

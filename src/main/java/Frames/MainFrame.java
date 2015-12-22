@@ -15,15 +15,15 @@ import java.awt.*;
  */
 public class MainFrame extends JFrame {
     //Таблица
-    protected DefaultTableModel clientModel, masterModel, adminModel;
-    protected JScrollPane clientScroll, masterScroll, adminScroll;
-    protected MyTable clientTable, masterTable, adminTable;
-    protected JTabbedPane tables;
+    private DefaultTableModel clientModel, masterModel, adminModel;
+    private JScrollPane clientScroll, masterScroll, adminScroll;
+    private MyTable clientTable, masterTable, adminTable;
+    private JTabbedPane tables;
     //Тулбар
-    protected JButton createBut, openBut, saveBut, exitBut;
-    protected JToolBar toolBar;
+    private JButton createBut, openBut, saveBut, exitBut;
+    private JToolBar toolBar;
     //Диалоги сохранения-загрузки
-    protected FileDialog save, load;
+    private FileDialog save, load;
     //Интерфейс
     private JButton addMasterBut, removeMasterBut, addClientBut, removeClientBut, readyBut;
     private JPanel interfacePanel;
@@ -63,13 +63,13 @@ public class MainFrame extends JFrame {
      */
     private void ToolBarInit() {
         createBut = new JButton(new ImageIcon(getClass().getResource("/pictures/create.png")));
-        createBut.setToolTipText("Создать новый список клиентов");
+        createBut.setToolTipText("Создать новую базу данных");
 
         openBut = new JButton(new ImageIcon(getClass().getResource("/pictures/open.png")));
-        openBut.setToolTipText("Открыть список клиентов");
+        openBut.setToolTipText("Открыть базу данных");
 
         saveBut = new JButton(new ImageIcon(getClass().getResource("/pictures/save.png")));
-        saveBut.setToolTipText("Сохранить список клиентов");
+        saveBut.setToolTipText("Сохранить базу данных");
 
         exitBut = new JButton(new ImageIcon(getClass().getResource("/pictures/exit.png")));
         exitBut.setToolTipText("Выход");

@@ -8,6 +8,9 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
 
+/**
+ * Множество мастеров и работа с ними
+ */
 public class Masters {
     Set<Master> records;
 
@@ -15,6 +18,11 @@ public class Masters {
         records = new TreeSet<Master>();
     }
 
+    /**
+     * Возвращает самого незагруженного мастера по данной специализации
+     * @param kod
+     * @return
+     */
     public Master getMaster(int kod) {
         Iterator<Master> it = records.iterator();
         Master master;
@@ -29,6 +37,11 @@ public class Masters {
         return mastertmp;
     }
 
+    /**
+     * Возвращает мастера по заданному имени
+     * @param name
+     * @return
+     */
     public Master getMaster(String name) {
         Iterator<Master> it = records.iterator();
         Master master;
@@ -41,6 +54,10 @@ public class Masters {
         return null;
     }
 
+    /**
+     * @param o
+     * @return истина, если данный мастер есть в множестве
+     */
     public boolean contain(Master o) {
         Iterator<Master> it = records.iterator();
         while(it.hasNext()) {
@@ -51,6 +68,11 @@ public class Masters {
         return false;
     }
 
+    /**
+     * Добавление мастера
+     * @param m
+     * @throws DoubleMasterException если мастер уже есть
+     */
     public void add(Master m) throws DoubleMasterException {
         if (!contain(m)) {
             records.add(m);
@@ -60,6 +82,10 @@ public class Masters {
         }
     }
 
+    /**
+     * Количество мастеров в множестве
+     * @return
+     */
     public int Kolvo() {
         int i;
         Iterator<Master> it = records.iterator();
@@ -71,6 +97,11 @@ public class Masters {
         return i;
     }
 
+    /**
+     * Возвращает массив строчек, превращая множество мастеров в читабельную таблицу данных
+     * @param forsave если истина, то не все переменные переходят из чисел в стоки
+     * @return
+     */
     public String[][] GiveStrings(boolean forsave) {
         if (Kolvo() == 0) {
             return null;
@@ -101,6 +132,11 @@ public class Masters {
         return tmp;
     }
 
+    /**
+     * Преобразует номер специализации в её название
+     * @param KOD
+     * @return
+     */
     public String KODToString(int KOD) {
         switch (KOD) {
             case 0: {
@@ -127,6 +163,9 @@ public class Masters {
         }
     }
 
+    /**
+     * Удаление всей базы данных
+     */
     public void Remove() {
         Iterator<Master> it;
         it = records.iterator();
@@ -136,6 +175,11 @@ public class Masters {
         }
     }
 
+    /**
+     * Удаление заданного мастера по имени
+     * @param name
+     * @throws MasterEmploedExeption если мастер занят работой
+     */
     public void Remove(String name) throws MasterEmploedExeption {
         Iterator<Master> it = records.iterator();
         Master tmpMaster;

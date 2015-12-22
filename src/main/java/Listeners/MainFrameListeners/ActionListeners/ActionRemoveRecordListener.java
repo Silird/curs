@@ -2,13 +2,15 @@ package Listeners.MainFrameListeners.ActionListeners;
 
 import Frames.MyTable;
 import util.Exceptions.CarNotReadyExeption;
-import util.WorkMasters;
 import util.WorkRecords;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Выписывание записи, если машина была готова
+ */
 public class ActionRemoveRecordListener implements ActionListener {
     private JFrame frame;
     private JTabbedPane tables;

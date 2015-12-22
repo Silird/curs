@@ -7,7 +7,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+/**
+ * Событие на сохранении нового местера, если нет такого же
+ */
 public class ActionMasterAddListener implements ActionListener {
     private JDialog mframe;
     private JTextField nameField, empMaxField;

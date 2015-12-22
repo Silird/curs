@@ -25,8 +25,8 @@ import java.io.IOException;
  * Обработка события нажатия на кнопку загрузки
  */
 public class ActionLoadListener implements ActionListener {
-    protected JFrame carsList;
-    protected FileDialog load;
+    private JFrame carsList;
+    private FileDialog load;
     private WorkMasters masters;
     private WorkRecords records;
 
@@ -58,7 +58,6 @@ public class ActionLoadListener implements ActionListener {
             if (load.getFile() == null) {
                 throw new NullFileException();
             }
-            //LoadXML(fileName);
             Load load = new Load();
             load.LoadXML(fileName, masters, records);
         }
@@ -67,37 +66,4 @@ public class ActionLoadListener implements ActionListener {
         }
         load.setFile("*.xml");
     }
-
-    /*
-    public void LoadXML(String fileName) {
-        int i;
-        try {
-            int rows = clientModel.getRowCount();
-            for (i = 0; i < rows; i++) {
-                clientModel.removeRow(0);
-            }
-            DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Document doc = dBuilder.parse(new File(fileName));
-            NodeList nlCars = doc.getElementsByTagName("car");
-            for (i = 0; i < nlCars.getLength(); i++) {
-                Node elem = nlCars.item(i);
-                NamedNodeMap attrs = elem.getAttributes();
-                String client = attrs.getNamedItem("client").getNodeValue();
-                String carName = attrs.getNamedItem("carname").getNodeValue();
-                String date = attrs.getNamedItem("date").getNodeValue();
-                String ready = attrs.getNamedItem("ready").getNodeValue();
-                clientModel.addRow(new String[] {client, carName, date, ready});
-            }
-        }
-        catch (SAXException ex) {
-            ex.printStackTrace();
-        }
-        catch (IOException ex) {
-            ex.printStackTrace();;
-        }
-        catch (ParserConfigurationException ex) {
-            ex.printStackTrace();;
-        }
-    }
-    */
 }

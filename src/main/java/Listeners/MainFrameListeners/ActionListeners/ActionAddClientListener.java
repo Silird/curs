@@ -1,6 +1,5 @@
 package Listeners.MainFrameListeners.ActionListeners;
 
-import Frames.MasterFrame;
 import Frames.RecordFrame;
 import util.WorkMasters;
 import util.WorkRecords;
@@ -9,6 +8,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Добавление записи о клиенте по нажатию на соответствующую кнопку
+ */
 public class ActionAddClientListener implements ActionListener {
     private WorkMasters masters;
     private WorkRecords records;

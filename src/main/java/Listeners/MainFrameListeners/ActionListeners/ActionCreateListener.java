@@ -8,9 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Обработка события нажатия на кнопку создания
+ * Обработка события нажатия на кнопку создания новой базы данных
  */
-
 public class ActionCreateListener implements ActionListener {
     private WorkMasters masters;
     private WorkRecords records;
@@ -21,7 +20,7 @@ public class ActionCreateListener implements ActionListener {
     }
 
     /**
-     * Очистка таблицы
+     * Очистка контейнеров
      * @param e
      */
     public void actionPerformed(ActionEvent e) {

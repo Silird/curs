@@ -9,6 +9,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Отметка записи о готовности машины
+ */
 public class ActionReadyListener implements ActionListener {
     private JFrame frame;
     private JTabbedPane tables;

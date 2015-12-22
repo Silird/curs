@@ -14,24 +14,18 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Загрузка из XML формата двух баз данных
+ */
 public class Load {
 
     public void LoadXML(String fileName, WorkMasters masters, WorkRecords records) {
         int i;
         try {
-            /*
-            int rows = model.getRowCount();
-            for (i = 0; i < rows; i++) {
-                model.removeRow(0);
-            }
-            */
             masters.Remove();
             records.Remove();
             DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document doc = dBuilder.parse(new File(fileName));
-            //NodeList TO = doc.getChildNodes();
-            //Element TO = doc.get
-            //NodeList nlMaster = TO.getElementsByTagName("masters");
             NodeList nlMaster = doc.getElementsByTagName("master");
             for (i = 0; i < nlMaster.getLength(); i++) {
                 Node elem = nlMaster.item(i);

@@ -8,6 +8,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Удаление мастера, если на нем не закреплена машина
+ */
 public class ActionRemoveMasterListener implements ActionListener {
     private JFrame frame;
     private JTabbedPane tables;

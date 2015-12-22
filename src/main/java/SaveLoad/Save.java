@@ -17,6 +17,9 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+/**
+ * Сохранение в XML формат 2 баз данных
+ */
 public class Save {
     public void SaveXML(String fileName, WorkMasters masters, WorkRecords records) {
         try {

@@ -5,6 +5,6 @@ package util.Exceptions;
  */
 public class CantDoItException extends Exception {
     public CantDoItException() {
-        super("Соррян, никто не может взять тачку((");
+        super("Нет доступных мастеров");
     }
 }

@@ -4,7 +4,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+/**
+ * Проверка на выбор №1 доп. специализации и на выбор одинаковой
+ */
 public class ActionKOD3Listener implements ActionListener {
     private JDialog mframe;
     private JComboBox KOD1, KOD2, KOD3;

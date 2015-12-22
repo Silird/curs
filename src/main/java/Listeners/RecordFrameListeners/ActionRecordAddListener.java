@@ -9,6 +9,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Сохранение новой записи в бд, если нет такого же клиента
+ */
 public class ActionRecordAddListener implements ActionListener {
     private JDialog rframe;
     private JTextField clientField, carField, breackingField;
