@@ -12,6 +12,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Node;
+import util.WorkMasters;
+import util.WorkRecords;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,19 +27,15 @@ import java.io.IOException;
 public class ActionLoadListener implements ActionListener {
     protected JFrame carsList;
     protected FileDialog load;
-    protected DefaultTableModel model;
+    private WorkMasters masters;
+    private WorkRecords records;
 
-    /**
-     * Конструктор
-     *
-     * @param cList
-     * @param l
-     * @param m
-     */
-    public ActionLoadListener(JFrame cList, FileDialog l, DefaultTableModel m) {
+
+    public ActionLoadListener(JFrame cList, FileDialog l, WorkMasters m, WorkRecords r) {
         carsList = cList;
         load = l;
-        model = m;
+        masters = m;
+        records = r;
     }
 
     /**
@@ -61,7 +60,7 @@ public class ActionLoadListener implements ActionListener {
             }
             //LoadXML(fileName);
             Load load = new Load();
-            //load.LoadXML(fileName, model);
+            load.LoadXML(fileName, masters, records);
         }
         catch (NullFileException ex) {
             JOptionPane.showMessageDialog(carsList, ex.getMessage());

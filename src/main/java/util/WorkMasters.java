@@ -16,7 +16,7 @@ public class WorkMasters {
         RefreshModel();
     }
 
-    private void RefreshModel() {
+    public void RefreshModel() {
         String tmp[][];
         int i, rows;
         tmp = masters.GiveStrings(false);
@@ -31,6 +31,14 @@ public class WorkMasters {
         for (i = 0; i < tmp.length; i++) {
             model.addRow(tmp[i]);
         }
+    }
+
+    public Master getMaster(int kod) {
+        return masters.getMaster(kod);
+    }
+
+    public Master getMaster(String name) {
+        return masters.getMaster(name);
     }
 
     public void add(String n, int kod[], int emax) throws DoubleMasterException {

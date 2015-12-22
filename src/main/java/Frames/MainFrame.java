@@ -20,12 +20,12 @@ public class MainFrame extends JFrame {
     protected MyTable clientTable, masterTable, adminTable;
     protected JTabbedPane tables;
     //Тулбар
-    protected JButton createBut, openBut, saveBut, printBut, exitBut;
+    protected JButton createBut, openBut, saveBut, exitBut;
     protected JToolBar toolBar;
     //Диалоги сохранения-загрузки
     protected FileDialog save, load;
     //Интерфейс
-    private JButton addMasterBut, removeMasterBut, addClientBut, removeClientBut;
+    private JButton addMasterBut, removeMasterBut, addClientBut, removeClientBut, readyBut;
     private JPanel interfacePanel;
 
     //База
@@ -53,7 +53,7 @@ public class MainFrame extends JFrame {
     private void FrameInit() {
         setTitle("Автомастерская");
         setSize(700, 300);
-        setMinimumSize(new Dimension(700, 300));
+        setMinimumSize(new Dimension(1000, 500));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -71,9 +71,6 @@ public class MainFrame extends JFrame {
         saveBut = new JButton(new ImageIcon(getClass().getResource("/pictures/save.png")));
         saveBut.setToolTipText("Сохранить список клиентов");
 
-        printBut = new JButton(new ImageIcon(getClass().getResource("/pictures/print.png")));
-        printBut.setToolTipText("Распечатать список клиентов");
-
         exitBut = new JButton(new ImageIcon(getClass().getResource("/pictures/exit.png")));
         exitBut.setToolTipText("Выход");
 
@@ -81,7 +78,6 @@ public class MainFrame extends JFrame {
         toolBar.add(createBut);
         toolBar.add(openBut);
         toolBar.add(saveBut);
-        toolBar.add(printBut);
         toolBar.add(exitBut);
 
         add(toolBar, BorderLayout.NORTH); //тулбар
@@ -97,12 +93,12 @@ public class MainFrame extends JFrame {
         clientScroll = new JScrollPane(clientTable);
 
         String columns1[] = {"Клиент", "Мастер", "Вид работы", "Описание неисправности"};
-        adminModel = new DefaultTableModel(null, columns);
+        adminModel = new DefaultTableModel(null, columns1);
         adminTable = new MyTable(adminModel);
         adminScroll = new JScrollPane(adminTable);
 
         String columns2[] = {"Имя мастера", "Специализация", "Доп. специализация №1",
-                "Доп. специализация №1", "Загруженность", "Max загруженность"};
+                "Доп. специализация №2", "Загруженность", "Max загруженность"};
         masterModel = new DefaultTableModel(null, columns2);
         masterTable = new MyTable(masterModel);
         masterScroll = new JScrollPane(masterTable);
@@ -141,9 +137,12 @@ public class MainFrame extends JFrame {
 
         addClientBut = new JButton("Добавить заявку");
 
+        readyBut = new JButton("Машина готова");
+
         removeClientBut = new JButton("Выписать заявку");
 
         interfacePanel.add(addClientBut);
+        interfacePanel.add(readyBut);
         interfacePanel.add(removeClientBut);
         interfacePanel.add(addMasterBut);
         interfacePanel.add(removeMasterBut);
@@ -155,7 +154,7 @@ public class MainFrame extends JFrame {
         Load loadb = new Load();
         wm = new WorkMasters(masterModel);
         wr = new WorkRecords(clientModel, adminModel);
-        loadb.LoadXML("D:\\Work\\Java\\Универ\\curs\\Сохранённые таблицы\\saved.xml", wm);
+        loadb.LoadXML("D:\\Work\\Java\\Универ\\curs\\Сохранённые таблицы\\saved.xml", wm, wr);
     }
 
 
@@ -165,12 +164,14 @@ public class MainFrame extends JFrame {
     private void ListenersInit() {
         //ActionListeners
         //Тулбар
-        exitBut.addActionListener(new ActionExitListener(wm));
-        saveBut.addActionListener(new ActionSaveListener(MainFrame.this, save, clientModel));
-        openBut.addActionListener(new ActionLoadListener(MainFrame.this, load, clientModel));
+        exitBut.addActionListener(new ActionExitListener(wm, wr));
+        saveBut.addActionListener(new ActionSaveListener(MainFrame.this, save, wm, wr));
+        openBut.addActionListener(new ActionLoadListener(MainFrame.this, load, wm, wr));
         createBut.addActionListener(new ActionCreateListener(wm, wr));
         //Интерфейс
         addMasterBut.addActionListener(new ActionAddMasterListener(MainFrame.this, wm));
+        readyBut.addActionListener(new ActionReadyListener(MainFrame.this, tables, clientTable, wr, wm));
+        removeClientBut.addActionListener(new ActionRemoveRecordListener(MainFrame.this, tables, clientTable, wr));
         removeMasterBut.addActionListener(new ActionRemoveMasterListener(MainFrame.this, tables, masterTable, wm));
         addClientBut.addActionListener(new ActionAddClientListener(MainFrame.this, wm, wr));
 
@@ -178,8 +179,7 @@ public class MainFrame extends JFrame {
         //Тулбар
         saveBut.addMouseListener(new MouseSaveListener(saveBut));                           // (\(\
         openBut.addMouseListener(new MouseOpenListener(openBut));                           // (>'•')
-        printBut.addMouseListener(new MousePrintListener(printBut));                        // (~(")(")
-        exitBut.addMouseListener(new MouseExitListener(exitBut));
+        exitBut.addMouseListener(new MouseExitListener(exitBut));                           // (~(")(")
         createBut.addMouseListener(new MouseCreateListener(createBut));
     }
 }

@@ -4,6 +4,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import util.WorkMasters;
+import util.WorkRecords;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -17,7 +18,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class Save {
-    public void SaveXML(String fileName, WorkMasters masters) {
+    public void SaveXML(String fileName, WorkMasters masters, WorkRecords records) {
         try {
             int i;
             String tmp[][];
@@ -27,17 +28,30 @@ public class Save {
             if (tmp == null) {
                 return;
             }
-            Node masterlist = doc.createElement("masterlist");
-            doc.appendChild(masterlist);
+            Node TO = doc.createElement("TO");
+            doc.appendChild(TO);
             for (i = 0; i < tmp.length; i++) {
                 Element master = doc.createElement("master");
-                masterlist.appendChild(master);
+                TO.appendChild(master);
                 master.setAttribute("name", tmp[i][0]);
                 master.setAttribute("KOD1", tmp[i][1]);
                 master.setAttribute("KOD2", tmp[i][2]);
                 master.setAttribute("KOD3", tmp[i][3]);
                 master.setAttribute("emp", tmp[i][4]);
                 master.setAttribute("empMax", tmp[i][5]);
+            }
+            tmp = records.GiveSaveStrings();
+            if (tmp != null) {
+                for (i = 0; i < tmp.length; i++) {
+                    Element record = doc.createElement("record");
+                    TO.appendChild(record);
+                    record.setAttribute("Client", tmp[i][0]);
+                    record.setAttribute("Car", tmp[i][1]);
+                    record.setAttribute("KOD", tmp[i][2]);
+                    record.setAttribute("Breacking", tmp[i][3]);
+                    record.setAttribute("Master", tmp[i][4]);
+                    record.setAttribute("Ready", tmp[i][5]);
+                }
             }
             Transformer trans = TransformerFactory.newInstance().newTransformer();
             trans.setOutputProperty(OutputKeys.INDENT, "yes");

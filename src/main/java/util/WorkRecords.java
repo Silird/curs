@@ -1,5 +1,6 @@
 package util;
 
+import util.Exceptions.AlreadyDoneException;
 import util.Exceptions.CantDoItException;
 import util.Exceptions.CarNotReadyExeption;
 import util.Exceptions.DoubleClientException;
@@ -36,13 +37,14 @@ public class WorkRecords {
         }
     }
 
-    public void add(String cl, String c, String br, int kod, Masters masters) throws DoubleClientException, CantDoItException {
+    public void add(String cl, String c, String br, int kod, WorkMasters masters) throws DoubleClientException, CantDoItException {
         records.add(new Record(cl, c, br, kod, masters));
         RefreshModels();
+        masters.RefreshModel();
     }
 
-    public void add(String cl, String c, String br, int kod, Master m) throws DoubleClientException {
-        records.add(new Record(cl, c, br, kod, m));
+    public void add(String cl, String c, String br, int kod, Master m, boolean r) throws DoubleClientException {
+        records.add(new Record(cl, c, br, kod, m, r));
         RefreshModels();
     }
 
@@ -54,6 +56,12 @@ public class WorkRecords {
     public void Remove(int row) throws CarNotReadyExeption {
         records.Remove(clientModel.getValueAt(row, 0).toString());
         RefreshModels();
+    }
+
+    public void setReady(int row, WorkMasters masters) throws AlreadyDoneException {
+        records.setReady(clientModel.getValueAt(row, 0).toString());
+        RefreshModels();
+        masters.RefreshModel();
     }
 
     public String[][] GiveClientStrings() {

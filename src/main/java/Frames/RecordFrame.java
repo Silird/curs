@@ -1,5 +1,6 @@
 package Frames;
 
+import Listeners.RecordFrameListeners.ActionRecordAddListener;
 import Listeners.RecordFrameListeners.ActionRecordCancelListener;
 import util.WorkMasters;
 import util.WorkRecords;
@@ -62,7 +63,7 @@ public class RecordFrame extends JDialog {
         carPanel = new JPanel();
         carPanel.add(carLeftPanel, BorderLayout.WEST);
 
-        KODBox = new JComboBox(new String[] {"Вид неисправности", "Покраска", "Кузовной ремонт", "Ремонт подвески",
+        KODBox = new JComboBox(new String[] {"Вид работы", "Покраска", "Кузовной ремонт", "Ремонт подвески",
                 "Ремонт двигателя", "Развал-схождение", "Прочее"});
         KODPanel = new JPanel();
         KODPanel.add(KODBox);
@@ -100,6 +101,8 @@ public class RecordFrame extends JDialog {
     }
 
     private void ListenersInit() {
+        addBut.addActionListener(new ActionRecordAddListener(RecordFrame.this, clientField, carField, KODBox,
+                breackingField, masters, records));
         cancelBut.addActionListener(new ActionRecordCancelListener(RecordFrame.this));
     }
 }

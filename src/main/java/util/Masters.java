@@ -15,17 +15,30 @@ public class Masters {
         records = new TreeSet<Master>();
     }
 
-    public Master GetMaster(int kod) {
+    public Master getMaster(int kod) {
         Iterator<Master> it = records.iterator();
         Master master;
         Master mastertmp = null;
         while (it.hasNext()) {
             master = it.next();
-            if (((mastertmp == null) && (master.isCan(kod) != -1)) || (master.isCan(kod) < mastertmp.isCan(kod))) {
+            if (((mastertmp == null) && (master.isCan(kod) > 0)) ||
+                    ((mastertmp != null) && (master.isCan(kod) > mastertmp.isCan(kod)))) {
                 mastertmp = master;
             }
         }
         return mastertmp;
+    }
+
+    public Master getMaster(String name) {
+        Iterator<Master> it = records.iterator();
+        Master master;
+        while (it.hasNext()) {
+            master = it.next();
+            if (master.getName().equals(name)) {
+                return master;
+            }
+        }
+        return null;
     }
 
     public boolean contain(Master o) {

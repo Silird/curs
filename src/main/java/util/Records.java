@@ -106,7 +106,7 @@ public class Records {
             tmp[i][2] = String.valueOf(tmpRecord.getKOD());
             tmp[i][3] = tmpRecord.getBreacking();
             tmp[i][4] = tmpRecord.getMaster().getName();
-            tmp[i][5] = String.valueOf(tmpRecord.getBreacking());
+            tmp[i][5] = String.valueOf(tmpRecord.isReady());
             i++;
         }
         return tmp;
@@ -159,17 +159,20 @@ public class Records {
         }
     }
 
-    public void setReady(String name) throws AlreadyDoneException {
+    public void setReady(String client)  throws AlreadyDoneException {
         Iterator<Record> it = records.iterator();
-        Record tmpRecord;
+        Record tmp;
         while (it.hasNext()) {
-            tmpRecord = it.next();
-            if (!tmpRecord.isReady()) {
-                tmpRecord.setReady();
-                return;
-            }
-            else {
-                throw new AlreadyDoneException();
+            tmp = it.next();
+            if (tmp.getClient().equals(client)) {
+                if (!tmp.isReady()) {
+                    tmp.setReady();
+                    tmp.getMaster().EmployDown();
+                    return;
+                }
+                else {
+                    throw new AlreadyDoneException();
+                }
             }
         }
     }

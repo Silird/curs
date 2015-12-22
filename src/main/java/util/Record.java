@@ -9,11 +9,12 @@ public class Record implements Comparable<Record> {
     private int KOD;
     private Master master;
 
-    public Record(String cl, String c, String br, int kod, Masters masters) throws CantDoItException {
-        master = masters.GetMaster(kod);
+    public Record(String cl, String c, String br, int kod, WorkMasters masters) throws CantDoItException {
+        master = masters.getMaster(kod);
         if (master == null) {
             throw new CantDoItException();
         }
+        master.EmployUp();
         client = cl;
         car = c;
         breacking = br;
@@ -21,13 +22,13 @@ public class Record implements Comparable<Record> {
         ready = false;
     }
 
-    public Record(String cl, String c, String br, int kod, Master m) {
+    public Record(String cl, String c, String br, int kod, Master m, boolean r) {
         master = m;
         client = cl;
         car = c;
         breacking = br;
         KOD = kod;
-        ready = false;
+        ready = r;
     }
 
     public String getClient() {
@@ -39,7 +40,7 @@ public class Record implements Comparable<Record> {
     }
 
     public String getBreacking() {
-        return car;
+        return breacking;
     }
 
     public boolean isReady() {

@@ -9,6 +9,9 @@ import SaveLoad.Save;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import util.WorkMasters;
+import util.WorkRecords;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -25,7 +28,8 @@ import java.io.IOException;
 public class ActionSaveListener implements ActionListener {
     protected JFrame carsList;
     protected FileDialog save;
-    protected DefaultTableModel model;
+    private WorkMasters masters;
+    private WorkRecords records;
 
     /**
      * Конструктор
@@ -34,10 +38,11 @@ public class ActionSaveListener implements ActionListener {
      * @param s
      * @param m
      */
-    public ActionSaveListener(JFrame cList, FileDialog s, DefaultTableModel m) {
+    public ActionSaveListener(JFrame cList, FileDialog s, WorkMasters m, WorkRecords r) {
         carsList = cList;
         save = s;
-        model = m;
+        masters = m;
+        records = r;
     }
 
     /**
@@ -57,7 +62,7 @@ public class ActionSaveListener implements ActionListener {
                 throw new NullFileException();
             }
             Save save = new Save();
-            //save.SaveXML(fileName, model);
+            save.SaveXML(fileName, masters, records);
         }
         catch (NullFileException ex) {
             JOptionPane.showMessageDialog(carsList, ex.getMessage());
