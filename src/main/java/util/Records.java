@@ -23,7 +23,7 @@ public class Records {
      * @param o
      * @return
      */
-    public boolean contain(Record o) {
+    private boolean contain(Record o) {
         Iterator<Record> it = records.iterator();
         while(it.hasNext()) {
             if (it.next().equals(o)) {
