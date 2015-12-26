@@ -43,7 +43,7 @@ public class Save {
                 master.setAttribute("emp", tmp[i][4]);
                 master.setAttribute("empMax", tmp[i][5]);
             }
-            tmp = records.GiveSaveStrings();
+            tmp = records.GiveSaveStrings(true);
             if (tmp != null) {
                 for (i = 0; i < tmp.length; i++) {
                     Element record = doc.createElement("record");

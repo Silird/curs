@@ -124,7 +124,7 @@ public class Records {
      * готовность и вид работы, не переводятся в читабельный вид
      * @return
      */
-    public String[][] GiveSaveStrings() {
+    public String[][] GiveSaveStrings(boolean forsave) {
         if (Kolvo() == 0) {
             return null;
         }
@@ -137,7 +137,12 @@ public class Records {
             tmpRecord = it.next();
             tmp[i][0] = tmpRecord.getClient();
             tmp[i][1] = tmpRecord.getCar();
-            tmp[i][2] = String.valueOf(tmpRecord.getKOD());
+            if (forsave) {
+                tmp[i][2] = String.valueOf(tmpRecord.getKOD());
+            }
+            else {
+                tmp[i][2] = KODToString(tmpRecord.getKOD());
+            }
             tmp[i][3] = tmpRecord.getBreacking();
             if (tmpRecord.getMaster() != null) {
                 tmp[i][4] = tmpRecord.getMaster().getName();
@@ -145,7 +150,17 @@ public class Records {
             else {
                 tmp[i][4] = "Уволен";
             }
-            tmp[i][5] = String.valueOf(tmpRecord.isReady());
+            if (forsave) {
+                tmp[i][5] = String.valueOf(tmpRecord.isReady());
+            }
+            else {
+                if (tmpRecord.isReady()) {
+                    tmp[i][5] = "Готово";
+                }
+                else {
+                    tmp[i][5] = "Не готово";
+                }
+            }
             i++;
         }
         return tmp;
@@ -201,12 +216,14 @@ public class Records {
         Record tmpRecord;
         while (it.hasNext()) {
             tmpRecord = it.next();
-            if (tmpRecord.isReady()) {
-                records.remove(tmpRecord);
-                return;
-            }
-            else {
-                throw new CarNotReadyExeption();
+            if (tmpRecord.getClient().equals(name)) {
+                if (tmpRecord.isReady()) {
+                    records.remove(tmpRecord);
+                    return;
+                }
+                else {
+                    throw new CarNotReadyExeption();
+                }
             }
         }
     }

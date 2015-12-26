@@ -26,7 +26,7 @@ public class ActionExitListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Save save;
         save = new Save();
-        save.SaveXML("D:\\Work\\Java\\Универ\\curs\\Сохранённые таблицы\\saved.xml", masters, records);
+        save.SaveXML("Сохранённые таблицы\\saved.xml", masters, records);
         System.exit(0);
     }
 }

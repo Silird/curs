@@ -12,11 +12,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class WorkRecords {
     Records records;
-    DefaultTableModel clientModel, adminModel;
+    DefaultTableModel clientModel;
 
-    public WorkRecords(DefaultTableModel cm, DefaultTableModel am) {
+    public WorkRecords(DefaultTableModel cm) {
         clientModel = cm;
-        adminModel = am;
+        //adminModel = am;
         records = new Records();
         RefreshModels();
     }
@@ -25,21 +25,20 @@ public class WorkRecords {
      * Обновление связанных моделей
      */
     private void RefreshModels() {
-        String tmp1[][], tmp2[][];
+        String tmp[][];
         int i, rows;
-        tmp1 = records.GiveClientStrings();
-        tmp2 = records.GiveAdminStrings();
+        tmp = records.GiveSaveStrings(false);
         rows = clientModel.getRowCount();
         for (i = 0; i < rows; i++) {
             clientModel.removeRow(0);
-            adminModel.removeRow(0);
+            //adminModel.removeRow(0);
         }
-        if (tmp1 == null) {
+        if (tmp == null) {
             return;
         }
-        for (i = 0; i < tmp1.length; i++) {
-            clientModel.addRow(tmp1[i]);
-            adminModel.addRow(tmp2[i]);
+        for (i = 0; i < tmp.length; i++) {
+            clientModel.addRow(tmp[i]);
+            //adminModel.addRow(tmp2[i]);
         }
     }
 
@@ -125,7 +124,7 @@ public class WorkRecords {
      * код работы и готовность в виде чисел
      * @return
      */
-    public String[][] GiveSaveStrings() {
-        return records.GiveSaveStrings();
+    public String[][] GiveSaveStrings(boolean forsave) {
+        return records.GiveSaveStrings(forsave);
     }
 }

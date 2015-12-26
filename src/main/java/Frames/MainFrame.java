@@ -15,9 +15,9 @@ import java.awt.*;
  */
 public class MainFrame extends JFrame {
     //Таблица
-    private DefaultTableModel clientModel, masterModel, adminModel;
-    private JScrollPane clientScroll, masterScroll, adminScroll;
-    private MyTable clientTable, masterTable, adminTable;
+    private DefaultTableModel clientModel, masterModel;
+    private JScrollPane clientScroll, masterScroll;
+    private MyTable clientTable, masterTable;
     private JTabbedPane tables;
     //Тулбар
     private JButton createBut, openBut, saveBut, exitBut;
@@ -87,15 +87,10 @@ public class MainFrame extends JFrame {
      * Инициализация таблицы
      */
     private void TableInit() {
-        String columns[] = {"Клиент", "Марка машины", "Вид работы", "Готовность"};
+        String columns[] = {"Клиент", "Марка машины", "Вид работы", "Описание", "Мастер", "Готовность"};
         clientModel = new DefaultTableModel(null, columns);
         clientTable = new MyTable(clientModel);
         clientScroll = new JScrollPane(clientTable);
-
-        String columns1[] = {"Клиент", "Мастер", "Вид работы", "Описание неисправности"};
-        adminModel = new DefaultTableModel(null, columns1);
-        adminTable = new MyTable(adminModel);
-        adminScroll = new JScrollPane(adminTable);
 
         String columns2[] = {"Имя мастера", "Специализация", "Доп. специализация №1",
                 "Доп. специализация №2", "Загруженность", "Max загруженность"};
@@ -105,7 +100,6 @@ public class MainFrame extends JFrame {
 
         tables = new JTabbedPane();
         tables.addTab("Основная информация", clientScroll);
-        tables.addTab("Дополнительная информация", adminScroll);
         tables.addTab("Мастера", masterScroll);
 
         add(tables, BorderLayout.CENTER); //Таблицы
@@ -153,8 +147,8 @@ public class MainFrame extends JFrame {
     private void BaseInit() {
         Load loadb = new Load();
         wm = new WorkMasters(masterModel);
-        wr = new WorkRecords(clientModel, adminModel);
-        loadb.LoadXML("D:\\Work\\Java\\Универ\\curs\\Сохранённые таблицы\\saved.xml", wm, wr);
+        wr = new WorkRecords(clientModel);
+        loadb.LoadXML("Сохранённые таблицы\\saved.xml", wm, wr);
     }
 
 
