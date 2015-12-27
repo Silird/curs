@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<TO>
+<master KOD1="2" KOD2="3" KOD3="4" emp="1" empMax="3" name="Иванов Сергей"/>
+<master KOD1="1" KOD2="2" KOD3="0" emp="2" empMax="6" name="Кириллов Владимир"/>
+<master KOD1="2" KOD2="3" KOD3="0" emp="0" empMax="3" name="Колегов Сергей"/>
+<master KOD1="1" KOD2="6" KOD3="0" emp="0" empMax="5" name="Петров Алексей"/>
+<master KOD1="5" KOD2="3" KOD3="6" emp="0" empMax="4" name="Сидоров Дмитрий"/>
+<record Breacking="вп" Car="Москвич" Client="Быков Андрей" KOD="3" Master="Сидоров Дмитрий" Ready="true"/>
+<record Breacking="Зелёный цвет" Car="Ford Mustang GT" Client="Жигунов Александр" KOD="1" Master="Кириллов Владимир" Ready="false"/>
+<record Breacking="Капитальный ремонт" Car="Dodge Charger" Client="Колегов Сегрей" KOD="4" Master="Иванов Сергей" Ready="false"/>
+<record Breacking="Вмятина на капоте" Car="Bugatti Veyron" Client="Салимов Анушервон" KOD="2" Master="Кириллов Владимир" Ready="false"/>
+</TO>
